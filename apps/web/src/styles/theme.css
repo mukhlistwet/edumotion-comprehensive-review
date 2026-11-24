@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+@theme {
+  --color-brand-50: #F2FFE8;
+  --color-brand-100: #E2FAD0;
+  --color-brand-500: #58CC02;
+  --color-brand-600: #46A302;
+  --color-brand-700: #347D02;
+
+  --color-navy-700: #344563;
+  --color-navy-900: #172B4D;
+
+  --color-blue-50: #EFF9FF;
+  --color-blue-100: #D8F0FF;
+  --color-blue-500: #1CB0F6;
+  --color-blue-700: #0C7BB3;
+
+  --color-purple-50: #F6EFFF;
+  --color-purple-100: #EAE0FF;
+  --color-purple-500: #A560E8;
+  --color-purple-700: #7834BE;
+
+  --color-orange-50: #FFF5E5;
+  --color-orange-100: #FFE4B8;
+  --color-orange-500: #FF9600;
+  --color-orange-700: #B86200;
+
+  --color-yellow-50: #FFFBE5;
+  --color-yellow-400: #FFC800;
+  --color-yellow-700: #9A7200;
+
+  --color-red-50: #FFF0F0;
+  --color-red-100: #FFD6D6;
+  --color-red-500: #FF4B4B;
+  --color-red-700: #C42323;
+
+  --color-success-50: #ECFDF3;
+  --color-success-600: #238636;
+
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F7F9FC;
+  --color-surface-subtle: #EEF2F6;
+  --color-app-border: #DCE3EA;
+
+  --color-text-primary: #172B4D;
+  --color-text-secondary: #52637A;
+  --color-text-muted: #718096;
+
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Nunito", "Nunito Sans", ui-sans-serif, sans-serif;
+  --shadow-card: 0 2px 0 rgba(23, 43, 77, 0.04), 0 8px 24px rgba(23, 43, 77, 0.05);
+}
+
+/* Pengaturan aksesibilitas tingkat root sesuai preferensi pengguna */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+[data-high-contrast="true"] {
+  --color-app-border: #172B4D;
+  --color-text-secondary: #172B4D;
+  --color-text-muted: #344563;
+}

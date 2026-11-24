@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edumotion.local/schemas/question-authoring-v1.schema.json",
+  "title": "EduMotion Question Authoring Schema v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "type",
+    "metadata",
+    "content",
+    "interaction",
+    "answerSpec",
+    "scoring",
+    "explanation",
+    "delivery",
+    "accessibility",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "edumotion-question-v1"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "type": {
+      "enum": [
+        "single_choice",
+        "multiple_select",
+        "true_false",
+        "numeric",
+        "short_text",
+        "fill_blank",
+        "matching",
+        "ordering",
+        "drag_drop",
+        "graph_plot",
+        "formula_input",
+        "diagram_label",
+        "simulation",
+        "worked_solution"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "curriculumId",
+        "curriculumVersionId",
+        "gradeLevelId",
+        "subjectId",
+        "topicId",
+        "competencyIds",
+        "difficulty",
+        "locale"
+      ],
+      "properties": {
+        "curriculumId": {
+          "type": "string"
+        },
+        "curriculumVersionId": {
+          "type": "string"
+        },
+        "gradeLevelId": {
+          "type": "string"
+        },
+        "subjectId": {
+          "type": "string"
+        },
+        "topicId": {
+          "type": "string"
+        },
+        "competencyIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "difficulty": {
+          "enum": [
+            "very_easy",
+            "easy",
+            "medium",
+            "hard",
+            "very_hard"
+          ]
+        },
+        "bloomLevel": {
+          "enum": [
+            "remember",
+            "understand",
+            "apply",
+            "analyze",
+            "evaluate",
+            "create"
+          ]
+        },
+        "locale": {
+          "type": "string",
+          "default": "id-ID"
+        },
+        "estimatedSeconds": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "content": {
+      "type": "object",
+      "required": [
+        "stem"
+      ],
+      "properties": {
+        "stem": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instruction": {
+          "type": "string"
+        },
+        "media": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "interaction": {
+      "type": "object",
+      "description": "Renderer-specific, schema-validated configuration."
+    },
+    "answerSpec": {
+      "type": "object",
+      "description": "Authoring-only answer key and accepted response specification."
+    },
+    "scoring": {
+      "type": "object",
+      "description": "Authoring-only scoring policy."
+    },
+    "explanation": {
+      "type": "object",
+      "description": "Authoring-only explanation, hints, feedback, misconceptions."
+    },
+    "delivery": {
+      "type": "object",
+      "properties": {
+        "allowedModes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "practice",
+              "challenge",
+              "tryout",
+              "formal_exam"
+            ]
+          }
+        },
+        "hintPolicy": {
+          "type": "string"
+        },
+        "feedbackPolicy": {
+          "type": "string"
+        },
+        "revisitPolicy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "altText": {
+          "type": "string"
+        },
+        "transcript": {
+          "type": "string"
+        },
+        "keyboardAlternative": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "draft",
+            "validation_failed",
+            "in_review",
+            "approved",
+            "published",
+            "archived"
+          ]
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "reviewedBy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Internal authoring provenance; never sent to student."
+    }
+  }
+}

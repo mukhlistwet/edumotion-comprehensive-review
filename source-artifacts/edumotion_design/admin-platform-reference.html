@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduMotion — Platform Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Nunito Sans','sans-serif'], display: ['Nunito','sans-serif'] }, colors: { brand:'#58CC02', ink:'#172B4D', sky:'#1CB0F6', violet:'#A560E8', amber:'#FF9600', danger:'#FF4B4B' }, boxShadow:{ soft:'0 8px 28px rgba(23,43,77,.07)' } } } }
+  </script>
+</head>
+<body class="bg-slate-50 text-ink font-sans">
+<div class="min-h-screen lg:flex">
+  <aside class="hidden lg:flex lg:w-64 xl:w-72 bg-white border-r border-slate-200 p-5 flex-col">
+    <a class="flex items-center gap-3 px-2 mb-9" href="#">
+      <div class="w-10 h-10 rounded-2xl bg-brand flex items-center justify-center text-white font-black text-xl">e</div>
+      <div><div class="font-display font-black text-xl tracking-tight">EduMotion</div><div class="text-xs text-slate-400 font-bold tracking-wider">PLATFORM CONSOLE</div></div>
+    </a>
+    <div class="px-3 mb-3 text-[11px] uppercase tracking-widest text-slate-400 font-extrabold">Workspace</div>
+    <nav class="space-y-1 text-sm font-bold">
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl bg-green-50 text-green-700" href="#"><i data-lucide="layout-dashboard" class="w-5 h-5"></i> Overview</a>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="building-2" class="w-5 h-5"></i> Institusi & sekolah</a>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="users" class="w-5 h-5"></i> Pengguna</a>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="book-open" class="w-5 h-5"></i> Kurikulum & konten</a>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="clipboard-check" class="w-5 h-5"></i> Bank soal & asesmen</a>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="credit-card" class="w-5 h-5"></i> Paket & billing</a>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="brain-circuit" class="w-5 h-5"></i> AI & penggunaan</a>
+    </nav>
+    <div class="px-3 mt-8 mb-3 text-[11px] uppercase tracking-widest text-slate-400 font-extrabold">System</div>
+    <nav class="space-y-1 text-sm font-bold">
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="shield-check" class="w-5 h-5"></i> Roles & permissions</a>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="activity" class="w-5 h-5"></i> Audit log</a>
+      <a class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-600 hover:bg-slate-50" href="#"><i data-lucide="settings" class="w-5 h-5"></i> Pengaturan</a>
+    </nav>
+    <div class="mt-auto rounded-2xl bg-slate-900 text-white p-4">
+      <div class="flex items-center gap-2 text-sm font-extrabold"><i data-lucide="life-buoy" class="w-4 h-4"></i> Admin support</div>
+      <p class="text-xs text-slate-300 mt-2 leading-relaxed">Pantau operasional platform dan tangani tiket institusi.</p>
+      <button class="mt-3 w-full rounded-xl bg-white/10 py-2 text-xs font-extrabold hover:bg-white/20">Buka support center</button>
+    </div>
+  </aside>
+
+  <main class="min-w-0 flex-1">
+    <header class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-slate-200 px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3"><button class="lg:hidden p-2 rounded-lg hover:bg-slate-100"><i data-lucide="menu"></i></button><div><div class="text-xs text-slate-400 font-bold">Platform Console / Overview</div><div class="font-extrabold">Ringkasan platform</div></div></div>
+      <div class="flex items-center gap-3"><button class="relative p-2 rounded-xl hover:bg-slate-100"><i data-lucide="bell" class="w-5 h-5"></i><span class="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full"></span></button><div class="h-9 w-9 rounded-full bg-violet-100 text-violet-700 flex items-center justify-center font-black">SA</div><div class="hidden sm:block"><div class="text-sm font-extrabold">Super Admin</div><div class="text-xs text-slate-400">Platform owner</div></div></div>
+    </header>
+    <div class="p-4 sm:p-6 lg:p-8 max-w-[1600px] mx-auto space-y-6">
+      <section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div><p class="text-sm font-bold text-green-700">Rabu, 18 November 2026</p><h1 class="font-display text-2xl sm:text-3xl font-black mt-1">Halo, Admin 👋</h1><p class="text-slate-500 mt-1">Pantau kesehatan platform, institusi, dan aktivitas pembelajaran.</p></div>
+        <div class="flex gap-2"><button class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white font-extrabold text-sm flex items-center gap-2"><i data-lucide="download" class="w-4 h-4"></i> Export report</button><button class="px-4 py-2.5 rounded-xl bg-brand text-white font-extrabold text-sm shadow-sm flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> Tambah institusi</button></div>
+      </section>
+      <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-soft"><div class="flex justify-between"><span class="text-sm font-bold text-slate-500">Total pengguna</span><span class="p-2 rounded-xl bg-sky-50 text-sky-600"><i data-lucide="users"></i></span></div><div class="text-3xl font-black mt-3">48.290</div><div class="text-xs text-green-700 font-extrabold mt-2">↑ 12,8% <span class="text-slate-400 font-semibold">vs bulan lalu</span></div></div>
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-soft"><div class="flex justify-between"><span class="text-sm font-bold text-slate-500">Institusi aktif</span><span class="p-2 rounded-xl bg-violet-50 text-violet-600"><i data-lucide="school"></i></span></div><div class="text-3xl font-black mt-3">126</div><div class="text-xs text-green-700 font-extrabold mt-2">↑ 8 institusi <span class="text-slate-400 font-semibold">bulan ini</span></div></div>
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-soft"><div class="flex justify-between"><span class="text-sm font-bold text-slate-500">Monthly active users</span><span class="p-2 rounded-xl bg-green-50 text-green-700"><i data-lucide="activity"></i></span></div><div class="text-3xl font-black mt-3">31.640</div><div class="text-xs text-green-700 font-extrabold mt-2">65,5% <span class="text-slate-400 font-semibold">dari total pengguna</span></div></div>
+        <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-soft"><div class="flex justify-between"><span class="text-sm font-bold text-slate-500">Pendapatan bulanan</span><span class="p-2 rounded-xl bg-amber-50 text-amber-600"><i data-lucide="wallet"></i></span></div><div class="text-3xl font-black mt-3">Rp 284 jt</div><div class="text-xs text-green-700 font-extrabold mt-2">↑ 9,2% <span class="text-slate-400 font-semibold">vs bulan lalu</span></div></div>
+      </section>
+      <section class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+        <div class="xl:col-span-2 bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 shadow-soft">
+          <div class="flex flex-wrap justify-between gap-3"><div><h2 class="font-black text-lg">Aktivitas platform</h2><p class="text-sm text-slate-400">Pengguna aktif harian · 7 hari terakhir</p></div><button class="text-sm font-extrabold text-sky-600">Lihat analitik</button></div>
+          <div class="h-52 flex items-end gap-3 sm:gap-5 mt-6 px-1">
+            <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-sky-100 rounded-t-lg h-24"></div><span class="text-xs text-slate-400">Kam</span></div>
+            <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-sky-100 rounded-t-lg h-32"></div><span class="text-xs text-slate-400">Jum</span></div>
+            <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-sky-100 rounded-t-lg h-28"></div><span class="text-xs text-slate-400">Sab</span></div>
+            <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-sky-100 rounded-t-lg h-40"></div><span class="text-xs text-slate-400">Min</span></div>
+            <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-sky-100 rounded-t-lg h-36"></div><span class="text-xs text-slate-400">Sen</span></div>
+            <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-sky-100 rounded-t-lg h-44"></div><span class="text-xs text-slate-400">Sel</span></div>
+            <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-brand rounded-t-lg h-48"></div><span class="text-xs font-extrabold text-slate-600">Rab</span></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 shadow-soft">
+          <h2 class="font-black text-lg">Kesehatan sistem</h2><p class="text-sm text-slate-400">Status layanan inti</p>
+          <div class="mt-5 space-y-4">
+            <div class="flex justify-between items-center"><div class="flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-green-50 text-green-700 flex items-center justify-center"><i data-lucide="server"></i></span><div><div class="font-extrabold text-sm">API & backend</div><div class="text-xs text-slate-400">99,98% uptime</div></div></div><span class="text-xs font-extrabold text-green-700 bg-green-50 px-2 py-1 rounded-full">Normal</span></div>
+            <div class="flex justify-between items-center"><div class="flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-green-50 text-green-700 flex items-center justify-center"><i data-lucide="database"></i></span><div><div class="font-extrabold text-sm">Database</div><div class="text-xs text-slate-400">Latency 24 ms</div></div></div><span class="text-xs font-extrabold text-green-700 bg-green-50 px-2 py-1 rounded-full">Normal</span></div>
+            <div class="flex justify-between items-center"><div class="flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center"><i data-lucide="brain-circuit"></i></span><div><div class="font-extrabold text-sm">AI services</div><div class="text-xs text-slate-400">Queue 18 jobs</div></div></div><span class="text-xs font-extrabold text-amber-700 bg-amber-50 px-2 py-1 rounded-full">Perhatian</span></div>
+            <div class="flex justify-between items-center"><div class="flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-green-50 text-green-700 flex items-center justify-center"><i data-lucide="hard-drive"></i></span><div><div class="font-extrabold text-sm">File storage</div><div class="text-xs text-slate-400">42% terpakai</div></div></div><span class="text-xs font-extrabold text-green-700 bg-green-50 px-2 py-1 rounded-full">Normal</span></div>
+          </div>
+        </div>
+      </section>
+      <section class="bg-white rounded-2xl border border-slate-100 shadow-soft overflow-hidden">
+        <div class="p-5 sm:p-6 flex flex-wrap items-center justify-between gap-3"><div><h2 class="font-black text-lg">Institusi terbaru</h2><p class="text-sm text-slate-400">Aktivitas onboarding dan status institusi</p></div><button class="text-sm font-extrabold text-sky-600">Semua institusi →</button></div>
+        <div class="overflow-x-auto"><table class="w-full text-sm min-w-[680px]"><thead class="bg-slate-50 text-slate-400 text-xs uppercase tracking-wider"><tr><th class="text-left px-6 py-3">Institusi</th><th class="text-left px-6 py-3">Tipe</th><th class="text-left px-6 py-3">Pengguna</th><th class="text-left px-6 py-3">Paket</th><th class="text-left px-6 py-3">Status</th><th class="px-6 py-3"></th></tr></thead><tbody class="divide-y divide-slate-100">
+          <tr><td class="px-6 py-4"><div class="font-extrabold">SMA Cendekia Nusantara</div><div class="text-xs text-slate-400">Bandung, Jawa Barat</div></td><td class="px-6 py-4">Sekolah</td><td class="px-6 py-4">1.240</td><td class="px-6 py-4">Institution Pro</td><td class="px-6 py-4"><span class="bg-green-50 text-green-700 rounded-full px-3 py-1 text-xs font-extrabold">Aktif</span></td><td class="px-6 py-4 text-right"><button class="p-2 hover:bg-slate-100 rounded-lg"><i data-lucide="more-horizontal"></i></button></td></tr>
+          <tr><td class="px-6 py-4"><div class="font-extrabold">Bimbel Pintar Bersama</div><div class="text-xs text-slate-400">Depok, Jawa Barat</div></td><td class="px-6 py-4">Bimbingan belajar</td><td class="px-6 py-4">385</td><td class="px-6 py-4">Institution Basic</td><td class="px-6 py-4"><span class="bg-green-50 text-green-700 rounded-full px-3 py-1 text-xs font-extrabold">Aktif</span></td><td class="px-6 py-4 text-right"><button class="p-2 hover:bg-slate-100 rounded-lg"><i data-lucide="more-horizontal"></i></button></td></tr>
+          <tr><td class="px-6 py-4"><div class="font-extrabold">SMP Harapan Bangsa</div><div class="text-xs text-slate-400">Bogor, Jawa Barat</div></td><td class="px-6 py-4">Sekolah</td><td class="px-6 py-4">—</td><td class="px-6 py-4">Trial</td><td class="px-6 py-4"><span class="bg-amber-50 text-amber-700 rounded-full px-3 py-1 text-xs font-extrabold">Menunggu verifikasi</span></td><td class="px-6 py-4 text-right"><button class="p-2 hover:bg-slate-100 rounded-lg"><i data-lucide="more-horizontal"></i></button></td></tr>
+        </tbody></table></div>
+      </section>
+      <p class="text-xs text-slate-400 text-center pb-4">EduMotion Platform Console · Reference UI only · Data bersifat ilustratif</p>
+    </div>
+  </main>
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>

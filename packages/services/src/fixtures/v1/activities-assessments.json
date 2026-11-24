@@ -1,0 +1,224 @@
+{
+  "fixtureVersion": "1.0.0",
+  "activities": [
+    {
+      "id": "act_alg_intro",
+      "type": "lesson",
+      "title": "Mengenal Variabel & Persamaan Linear",
+      "subjectId": "subj_math",
+      "mode": "practice",
+      "estimatedMinutes": 5,
+      "xpReward": 30,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000005",
+        "11111111-1111-4111-8111-000000000009",
+        "11111111-1111-4111-8111-000000000001"
+      ]
+    },
+    {
+      "id": "act_alg_linear_basic",
+      "type": "practice",
+      "title": "Latihan Operasi Invers Aljabar",
+      "subjectId": "subj_math",
+      "mode": "practice",
+      "estimatedMinutes": 7,
+      "xpReward": 45,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000001",
+        "11111111-1111-4111-8111-000000000006"
+      ]
+    },
+    {
+      "id": "act_alg_two_step",
+      "type": "practice",
+      "title": "Latihan Persamaan Dua Langkah & Distributif",
+      "subjectId": "subj_math",
+      "mode": "practice",
+      "estimatedMinutes": 8,
+      "xpReward": 50,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000008",
+        "11111111-1111-4111-8111-000000000011",
+        "11111111-1111-4111-8111-000000000014"
+      ]
+    },
+    {
+      "id": "act_alg_ordering",
+      "type": "challenge",
+      "title": "Tantangan Urutan Langkah Aljabar",
+      "subjectId": "subj_math",
+      "mode": "challenge",
+      "estimatedMinutes": 6,
+      "xpReward": 65,
+      "heartsEnabled": false,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000008",
+        "11111111-1111-4111-8111-000000000002"
+      ]
+    },
+    {
+      "id": "act_alg_graph",
+      "type": "practice",
+      "title": "Eksplorasi Koordinat Kartesius",
+      "subjectId": "subj_math",
+      "mode": "practice",
+      "estimatedMinutes": 6,
+      "xpReward": 55,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000010",
+        "11111111-1111-4111-8111-000000000015"
+      ]
+    },
+    {
+      "id": "act_alg_formula",
+      "type": "practice",
+      "title": "Latihan Input Rumus Simbolik",
+      "subjectId": "subj_math",
+      "mode": "practice",
+      "estimatedMinutes": 7,
+      "xpReward": 60,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000011",
+        "11111111-1111-4111-8111-000000000006"
+      ]
+    },
+    {
+      "id": "act_geo_angles",
+      "type": "practice",
+      "title": "Geometri Sudut & Label Segitiga",
+      "subjectId": "subj_math",
+      "mode": "practice",
+      "estimatedMinutes": 8,
+      "xpReward": 75,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000012",
+        "11111111-1111-4111-8111-000000000018"
+      ]
+    },
+    {
+      "id": "act_alg_boss",
+      "type": "challenge",
+      "title": "Boss Challenge: Penguasaan Aljabar & Geometri",
+      "subjectId": "subj_math",
+      "mode": "challenge",
+      "estimatedMinutes": 12,
+      "xpReward": 120,
+      "heartsEnabled": false,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000001",
+        "11111111-1111-4111-8111-000000000011",
+        "11111111-1111-4111-8111-000000000014"
+      ]
+    },
+    {
+      "id": "act_phys_units",
+      "type": "practice",
+      "title": "Besaran Pokok, Turunan & Satuan SI",
+      "subjectId": "subj_phys",
+      "mode": "practice",
+      "estimatedMinutes": 6,
+      "xpReward": 40,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000007",
+        "11111111-1111-4111-8111-000000000003"
+      ]
+    },
+    {
+      "id": "act_phys_glb",
+      "type": "practice",
+      "title": "Kinematika Gerak Lurus Beraturan",
+      "subjectId": "subj_phys",
+      "mode": "practice",
+      "estimatedMinutes": 7,
+      "xpReward": 55,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000003",
+        "11111111-1111-4111-8111-000000000004"
+      ]
+    },
+    {
+      "id": "act_phys_newton_sim",
+      "type": "simulation",
+      "title": "Simulasi Eksperimen Hukum II Newton",
+      "subjectId": "subj_phys",
+      "mode": "practice",
+      "estimatedMinutes": 10,
+      "xpReward": 90,
+      "heartsEnabled": true,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000013",
+        "11111111-1111-4111-8111-000000000007"
+      ]
+    }
+  ],
+  "assessments": [
+    {
+      "id": "asm_tryout_math_01",
+      "tenantId": "tenant_cendekia",
+      "title": "Tryout Matematika Semester Ganjil",
+      "subtitle": "Aljabar, Geometri & Persamaan Kuadrat",
+      "mode": "tryout",
+      "subjectId": "subj_math",
+      "durationMinutes": 45,
+      "heartsEnabled": false,
+      "xpAffectsGrade": false,
+      "scheduledLabel": "Tersedia sekarang",
+      "releasePolicy": "immediate_after_submit",
+      "releaseAt": null,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000001",
+        "11111111-1111-4111-8111-000000000006",
+        "11111111-1111-4111-8111-000000000008",
+        "11111111-1111-4111-8111-000000000010",
+        "11111111-1111-4111-8111-000000000018"
+      ]
+    },
+    {
+      "id": "asm_uts_phys_01",
+      "tenantId": "tenant_cendekia",
+      "title": "UTS Fisika Resmi · Kelas X",
+      "subtitle": "Kinematika, Besaran SI & Uraian Penalaran",
+      "mode": "formal_exam",
+      "subjectId": "subj_phys",
+      "durationMinutes": 60,
+      "heartsEnabled": false,
+      "xpAffectsGrade": false,
+      "scheduledLabel": "Jadwal Rilis Pembahasan: 2030-01-01",
+      "releasePolicy": "scheduled_release",
+      "releaseAt": "2030-01-01T12:00:00Z",
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000003",
+        "11111111-1111-4111-8111-000000000004",
+        "11111111-1111-4111-8111-000000000007",
+        "11111111-1111-4111-8111-000000000014"
+      ]
+    },
+    {
+      "id": "asm_placement_math",
+      "tenantId": null,
+      "title": "Placement Test Diagnostik Matematika",
+      "subtitle": "Menentukan titik awal jalur belajar dan rekomendasi remedial",
+      "mode": "formal_exam",
+      "subjectId": "subj_math",
+      "durationMinutes": 25,
+      "heartsEnabled": false,
+      "xpAffectsGrade": false,
+      "scheduledLabel": "Dapat diikuti kapan saja",
+      "releasePolicy": "immediate_after_submit",
+      "releaseAt": null,
+      "questionIds": [
+        "11111111-1111-4111-8111-000000000002",
+        "11111111-1111-4111-8111-000000000001",
+        "11111111-1111-4111-8111-000000000011"
+      ]
+    }
+  ]
+}

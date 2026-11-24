@@ -1,0 +1,27 @@
+{
+  "name": "@edumotion/mobile",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "dev:preview": "vite --config vite.mobile.config.js",
+    "build:preview": "vite build --config vite.mobile.config.js"
+  },
+  "dependencies": {
+    "@edumotion/design-tokens": "*",
+    "@edumotion/domain": "*",
+    "@edumotion/services": "*",
+    "expo": "^58.0.26",
+    "expo-secure-store": "^58.0.3",
+    "expo-status-bar": "^58.0.5",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-native": "^0.88.1",
+    "react-native-safe-area-context": "^5.11.1",
+    "react-native-web": "^0.21.4"
+  }
+}

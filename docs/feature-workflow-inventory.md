@@ -1,0 +1,70 @@
+# Inventaris Fitur & Workflow EduMotion (Final Phase 1–4)
+
+Dokumen ini memetakan seluruh fitur, layar, dan workflow wajib dari `edumotion-master-implementation-prompt.md`, dokumen kanonis `docs/`, kontrak `contracts/`, dan `source-artifacts/`.  
+Status yang digunakan: `not_started` | `in_progress` | `implemented` | `review_needed` | `accepted` | `blocked`.  
+Ringkasan akhir Phase 4: **37 dari 37** kelompok fitur berstatus **`accepted`** setelah terverifikasi lintas FE (`mock`), Backend LoopBack 4 + PostgreSQL, dan Integrasi End-to-End HTTP (`npm test` 44/44, `test:e2e` 8/8, `test:e2e:integration` 2/2).
+
+## 1. Shared Experience, Auth & Akun
+| ID | Modul | Fitur / Workflow | Surface | Role / Akses | Status | Bukti Implementasi & Test |
+|---|---|---|---|---|---|---|
+| FEAT-ACC-01 | Public & Auth | Landing Page, Login tervalidasi + Persona Demo, Registrasi & Onboarding Jenjang/Kurikulum | Web, Mobile | Publik / Semua Role | `accepted` | `AuthPages.jsx`, `MobileScreens.jsx`, `apps/api/src/services/auth-service.js` (`scrypt`), `tests/backend/security-outbox-and-domain.test.js`, `tests/e2e-integration/real-backend.spec.js` |
+| FEAT-ACC-02 | Pemulihan & Sesi | Lupa Kata Sandi, Reset Kata Sandi, Refresh Token Rotation, Sesi Berakhir (401), Logout aman | Web, Mobile | Terautentikasi | `accepted` | `AuthPages.jsx`, `http-client.js` (`onRefreshToken`), `auth-service.js` (`auth_refresh_tokens`), `tests/integration/fe-be-full-matrix.test.js`, `tests/backend/security-outbox-and-domain.test.js` |
+| FEAT-ACC-03 | Access & Entitlement | Halaman Access Denied (403), Display Entitlement (Freemium/Premium/Family/B2B), Alur Upgrade Plan | Web, Mobile | Semua Role | `accepted` | `AuthPages.jsx`, `RoleScopeGuard.jsx`, `auth-service.js` (`upgradeEntitlement`), `tests/workflows/critical-journeys.test.jsx`, `tests/integration/fe-be-full-matrix.test.js` |
+| FEAT-ACC-04 | Profil & Notifikasi | Profil, Pengaturan Aksesibilitas (`reducedMotion`, `highContrast`, `textScale`), Notifikasi/Inbox | Web, Mobile | Semua Role | `accepted` | `StudentPages.jsx`, `MobileScreens.jsx`, `gamification-service.js`, `docs/UX-AND-RESPONSIVE-AUDIT.md`, `tests/e2e/responsive-and-workflows.spec.js` |
+| FEAT-ACC-05 | App Shell & States | App Shell responsif (Sidebar Desktop, Drawer Tablet, Bottom Nav Mobile), Loading, Empty, Error Boundary | Web, Mobile | Semua Role | `accepted` | `AppShells.jsx`, `AppRouter.jsx` (`React.lazy`), `FeedbackStates.jsx`, `tests/e2e/responsive-and-workflows.spec.js` (`320px`–`1920px` + `390x844`), `tests/e2e-integration/real-backend.spec.js` |
+
+## 2. Pengalaman Belajar Siswa & Gamifikasi
+| ID | Modul | Fitur / Workflow | Surface | Role / Akses | Status | Bukti Implementasi & Test |
+|---|---|---|---|---|---|---|
+| FEAT-STD-01 | Dashboard Siswa | Ringkasan target harian, streak, XP, materi dikuasai, kartu path aktif, rekomendasi latihan, agenda ujian | Web, Mobile | Student | `accepted` | `StudentPages.jsx`, `MobileScreens.jsx`, `tests/components/renderers-and-mobile.test.jsx`, `tests/e2e-integration/real-backend.spec.js` (`real-mobile-synced-390x844.png`) |
+| FEAT-STD-02 | Kurikulum & Path | Katalog Kurikulum (Merdeka/Cambridge/IB), Jenjang, Mapel (Matematika/Fisika), Topik, Learning Path & Chapter | Web, Mobile | Student | `accepted` | `StudentPages.jsx`, `learning-service.js`, `apps/api/migrations/001_canonical_schema.sql`, `tests/backend/migrations-and-backup.test.js` |
+| FEAT-STD-03 | Mastery & Remedial | Penguasaan kompetensi (0-100 terpisah dari XP), anti-farming replay, spaced repetition (1/3/7/14/30 hari), rute remedial | Web, Mobile | Student | `accepted` | `mastery-engine.js`, `learning-service.js`, `tests/unit/qa-acceptance-domain.test.js` (`PRG-002..007`), `tests/integration/fe-be-full-matrix.test.js` |
+| FEAT-STD-04 | Riwayat & Hasil | Riwayat aktivitas belajar, detail percobaan, hasil evaluasi & pembahasan | Web, Mobile | Student | `accepted` | `StudentPages.jsx`, `AssessmentPages.jsx`, `learning-service.js`, `assessment-service.js`, `tests/e2e-integration/real-backend.spec.js` |
+| FEAT-GAM-01 | Gamifikasi | Append-only XP Ledger (DB trigger), Streak, Gems, Quests, Achievements, Player Rank Level 0–10 | Web, Mobile | Student | `accepted` | `gamification-engine.js`, `gamification-service.js`, `002_indexes_and_guards.sql`, `tests/backend/migrations-and-backup.test.js`, `tests/integration/fe-be-full-matrix.test.js` |
+| FEAT-GAM-02 | Leaderboard & Privasi | Liga & Papan Peringkat dengan child-safe privacy masking default | Web, Mobile | Student | `accepted` | `gamification-engine.js`, `gamification-service.js`, `tests/services/adapter-parity-and-rbac.test.js`, `docs/AUTH-RBAC-TENANCY-MATRIX.md` |
+
+## 3. Journey Experience Engine
+| ID | Modul | Fitur / Workflow | Surface | Role / Akses | Status | Bukti Implementasi & Test |
+|---|---|---|---|---|---|---|
+| FEAT-JRN-01 | Progression Kanonis | Hierarki `Curriculum -> Subject -> Learning Path -> Chapter -> Journey Node -> Activity -> Question` & prasyarat node | Web, Mobile | Student | `accepted` | `journey-engine.js`, `journey-service.js`, `tests/unit/qa-acceptance-domain.test.js` (`JRN-011 & JRN-012`), `tests/contracts/openapi-and-portability.test.js` |
+| FEAT-JRN-02 | 6 Renderer Template | Adventure Journey, Board Game, World Exploration, Skill Tree, Racing Track, Galaxy Mission di atas 1 view model | Web, Mobile | Student | `accepted` | `JourneyRenderers.jsx`, `MobileJourneyMap.jsx`, `tests/components/renderers-and-mobile.test.jsx` |
+| FEAT-JRN-03 | Snapshot & Boundary | Snapshot chapter immutable (`UNIQUE (user_id, chapter_id)`), pemilihan tengah chapter menjadi `pendingTemplateId` | Web, Mobile | Student | `accepted` | `journey-service.js`, `JourneyExperiencePage.jsx`, `tests/unit/qa-acceptance-domain.test.js`, `tests/integration/fe-be-full-matrix.test.js` |
+| FEAT-JRN-04 | Mode Seleksi & Unlock | Adaptive, Personal, Random, Hybrid Unlock & sinkronisasi lintas Web ↔ Mobile via PostgreSQL | Web, Mobile | Student | `accepted` | `journey-service.js`, `tests/unit/qa-acceptance-domain.test.js` (`JRN-001..013`), `tests/integration/fe-be-full-matrix.test.js` |
+| FEAT-JRN-05 | Preview & Aksesibilitas | Sandbox Read-Only Template Preview, navigasi keyboard penuh, reduced-motion support | Web, Mobile | Student | `accepted` | `JourneyExperiencePage.jsx`, `tests/components/renderers-and-mobile.test.jsx`, `tests/e2e/responsive-and-workflows.spec.js` |
+
+## 4. Interactive Question Renderers & Activity Player
+| ID | Modul | Fitur / Workflow | Surface | Role / Akses | Status | Bukti Implementasi & Test |
+|---|---|---|---|---|---|---|
+| FEAT-QST-01 | 14 Renderer Kanonis | `single_choice`, `multiple_select`, `true_false`, `numeric`, `short_text`, `fill_blank`, `matching`, `ordering`, `drag_drop`, `graph_plot`, `formula_input`, `diagram_label`, `simulation`, `worked_solution` | Web, Mobile | Student / Preview | `accepted` | `QuestionRenderer.jsx`, `MobileQuestionCard.jsx`, `tests/contracts/canonical-schemas.test.js`, `tests/components/renderers-and-mobile.test.jsx` |
+| FEAT-QST-02 | Legacy & Keamanan DTO | Pemetaan alias `essay` -> `worked_solution`, Student Delivery DTO allowlisted di mock dan server API | Web, Mobile | Student | `accepted` | `question-engine.js` (`toStudentDeliveryDto`), `learning-service.js`, `tests/contracts/openapi-and-portability.test.js`, `tests/integration/fe-be-full-matrix.test.js` |
+| FEAT-QST-03 | Mode Latihan & Tantangan | Practice Mode (hearts aktif, hint bertingkat, feedback & langkah KaTeX), Daily/Weekly Challenge, Interactive Gallery | Web, Mobile | Student | `accepted` | `PracticePages.jsx`, `learning-service.js`, `tests/integration/fe-be-full-matrix.test.js`, `tests/e2e/responsive-and-workflows.spec.js` |
+| FEAT-QST-04 | Aksesibilitas Interaksi | Alternatif keyboard/sentuh untuk `drag_drop`, `ordering`, `graph_plot`, `diagram_label`, dan kontrol Play/Pause/Reset pada `simulation` | Web, Mobile | Student | `accepted` | `QuestionRenderer.jsx`, `MobileQuestionCard.jsx`, `docs/UX-AND-RESPONSIVE-AUDIT.md`, `tests/components/renderers-and-mobile.test.jsx` |
+
+## 5. Assessment & Ujian Formal
+| ID | Modul | Fitur / Workflow | Surface | Role / Akses | Status | Bukti Implementasi & Test |
+|---|---|---|---|---|---|---|
+| FEAT-ASM-01 | Arena Ujian Formal | Tryout, UTS, UAS, Placement Test dengan immutable question snapshot & timer otoritatif server | Web, Mobile | Student | `accepted` | `assessment-engine.js`, `assessment-service.js`, `AssessmentPages.jsx`, `tests/unit/qa-acceptance-domain.test.js`, `tests/integration/fe-be-full-matrix.test.js` |
+| FEAT-ASM-02 | Autosave & Submit | Autosave idempotent (`idempotency_records`), navigator soal & bookmark, submit idempotent | Web, Mobile | Student | `accepted` | `assessment-service.js`, `AssessmentPages.jsx`, `tests/integration/fe-be-full-matrix.test.js`, `tests/e2e-integration/real-backend.spec.js` |
+| FEAT-ASM-03 | Kebijakan Ujian | Tanpa Hearts pada formal exam, XP tidak mengubah nilai ujian, release policy menahan pembahasan sebelum jadwal | Web, Mobile | Student | `accepted` | `assessment-service.js`, `tests/unit/qa-acceptance-domain.test.js` (`ASM-001..008`), `tests/workflows/critical-journeys.test.jsx` |
+
+## 6. Content Studio: Question Bank, Manual Builder & AI Generator
+| ID | Modul | Fitur / Workflow | Surface | Role / Akses | Status | Bukti Implementasi & Test |
+|---|---|---|---|---|---|---|
+| FEAT-STU-01 | Question Bank | Listing, pencarian, multi-filter, sort, paginasi, riwayat versi, immutable published version & buat versi baru, arsip | Web | Author, Reviewer, Publisher, Admin | `accepted` | `StudioPages.jsx`, `question-service.js`, `tests/integration/fe-be-full-matrix.test.js`, `tests/unit/qa-acceptance-domain.test.js` |
+| FEAT-STU-02 | Manual Question Builder | 5 tab lengkap, validator blocking/warning, live desktop/mobile sanitized preview + persistensi PostgreSQL | Web | Author, Admin | `accepted` | `ManualQuestionBuilderPage.jsx`, `question-service.js`, `tests/workflows/critical-journeys.test.jsx`, `tests/e2e-integration/real-backend.spec.js` |
+| FEAT-STU-03 | Upload Media & Keamanan | Validasi format/MIME/ukuran/dimensi & magic bytes (`4D5A` ditolak 415), randomized storageKey, wajib altText | Web | Author, Admin | `accepted` | `media-validator.js`, `question-service.js`, `tests/backend/security-outbox-and-domain.test.js`, `tests/integration/fe-be-full-matrix.test.js` |
+| FEAT-STU-04 | Review & Publishing | Submit for review -> Request changes / Approve -> Publish idempotent + audit log + outbox + isolasi tenant | Web | Author, Reviewer, Publisher | `accepted` | `StudioPages.jsx`, `question-service.js`, `tests/integration/fe-be-full-matrix.test.js`, `tests/backend/security-outbox-and-domain.test.js` |
+| FEAT-AIQ-01 | AI Generator Brief | Konfigurasi taksonomi terikat, distribusi difficulty (=100%), prompt preview, batas biaya | Web | Author, Admin | `accepted` | `AIQuestionGeneratorPage.jsx`, `ai-service.js`, `tests/workflows/critical-journeys.test.jsx`, `tests/e2e-integration/real-backend.spec.js` |
+| FEAT-AIQ-02 | AI Pipeline & Safety | 9-tahap, detektor JSON rusak / salah hitung / taksonomi fiktif / kode eksekusi berbahaya, bounded retry, cost cap | Web | Author, Admin | `accepted` | `ai-pipeline.js`, `ai-service.js`, `tests/unit/qa-acceptance-domain.test.js` (`AIQ-002..010`) |
+| FEAT-AIQ-03 | Human Review & Accept | Accept ke PostgreSQL `questions`/`question_versions` sebagai `draft` saja, reject, bulk accept | Web | Author, Reviewer | `accepted` | `AIQuestionGeneratorPage.jsx`, `ai-service.js`, `tests/integration/fe-be-full-matrix.test.js`, `tests/e2e-integration/real-backend.spec.js` |
+
+## 7. Portal Akademi / Sekolah & Konsol Platform Admin
+| ID | Modul | Fitur / Workflow | Surface | Role / Akses | Status | Bukti Implementasi & Test |
+|---|---|---|---|---|---|---|
+| FEAT-SCH-01 | Portal Sekolah | Dashboard institusi, manajemen siswa, guru/staf, kelas/rombel, mapel & penugasan, kalender akademik | Web | School Staff (scoped) | `accepted` | `SchoolPages.jsx`, `school-admin-service.js`, `tests/e2e-integration/real-backend.spec.js` (`real-web-school-1280.png`) |
+| FEAT-SCH-02 | Penilaian & Laporan | Asesmen sekolah, grading rubrik manual soal `worked_solution` teraudit, laporan kompetensi & progres rombel | Web | Guru, Wakasek, Kepsek | `accepted` | `SchoolPages.jsx`, `school-admin-service.js` (`gradeWorkedSubmission` + `audit_logs`), `tests/e2e-integration/real-backend.spec.js` |
+| FEAT-SCH-03 | Konseling & Orang Tua | Sinyal risiko belajar & catatan tindak lanjut BK (audited), Portal Orang Tua terbatas pada siswa tertaut resmi | Web, Mobile (Parent) | Konselor, Wali Kelas, Orang Tua | `accepted` | `SchoolPages.jsx`, `MobileScreens.jsx`, `school-admin-service.js`, `tests/services/adapter-parity-and-rbac.test.js`, `tests/backend/security-outbox-and-domain.test.js` |
+| FEAT-SCH-04 | Tata Kelola Sekolah | Peran kustom sekolah (permission-aware), pengaturan tenant institusi | Web | School Owner, Admin Akademik | `accepted` | `SchoolPages.jsx`, `school-admin-service.js` (`school_custom_roles`), `docs/AUTH-RBAC-TENANCY-MATRIX.md` |
+| FEAT-ADM-01 | Konsol Platform | Overview & health sistem, manajemen institusi + wajib `auditReason` lintas-tenant, pengguna global | Web | Platform Admin (scoped) | `accepted` | `AdminPages.jsx`, `school-admin-service.js`, `tests/backend/security-outbox-and-domain.test.js`, `tests/e2e-integration/real-backend.spec.js` |
+| FEAT-ADM-02 | Kurikulum, Soal & Journey | Kurikulum & taksonomi global, bank soal global, konfigurasi katalog & kebijakan unlock Journey Template | Web | Curriculum Admin, Super Admin | `accepted` | `AdminPages.jsx`, `school-admin-service.js`, `tests/unit/qa-acceptance-domain.test.js` (`JRN-013`) |
+| FEAT-ADM-03 | Monetisasi, AI & Audit | Paket/billing/entitlement, antrean & kuota AI, matriks RBAC global, audit log immutable (trigger PostgreSQL) | Web | Platform Admin (scoped) | `accepted` | `AdminPages.jsx`, `002_indexes_and_guards.sql`, `tests/backend/migrations-and-backup.test.js`, `tests/e2e-integration/real-backend.spec.js` (`real-web-admin-audit-1280.png`) |

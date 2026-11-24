@@ -1,0 +1,75 @@
+{
+  "fixtureVersion": "1.0.0",
+  "curricula": [
+    {
+      "id": "cur_merdeka",
+      "code": "MERDEKA",
+      "name": "Kurikulum Merdeka",
+      "status": "active",
+      "versions": [
+        { "id": "ver_merdeka_2026", "version": "2026", "effectiveFrom": "2026-07-01", "status": "active" }
+      ]
+    },
+    {
+      "id": "cur_cambridge",
+      "code": "CAMBRIDGE",
+      "name": "Cambridge IGCSE / A-Level",
+      "status": "active",
+      "versions": [
+        { "id": "ver_cambridge_2026", "version": "2026", "effectiveFrom": "2026-01-01", "status": "active" }
+      ]
+    },
+    {
+      "id": "cur_ib",
+      "code": "IB_DP",
+      "name": "IB Diploma Programme",
+      "status": "active",
+      "versions": [
+        { "id": "ver_ib_2026", "version": "2026", "effectiveFrom": "2026-01-01", "status": "active" }
+      ]
+    }
+  ],
+  "gradeLevels": [
+    { "id": "grade_sd_5", "educationLevel": "SD", "gradeCode": "SD-5", "displayName": "SD Kelas 5" },
+    { "id": "grade_smp_8", "educationLevel": "SMP", "gradeCode": "SMP-8", "displayName": "SMP Kelas 8" },
+    { "id": "grade_sma_10", "educationLevel": "SMA", "gradeCode": "SMA-10", "displayName": "SMA Kelas X" },
+    { "id": "grade_sma_11", "educationLevel": "SMA", "gradeCode": "SMA-11", "displayName": "SMA Kelas XI" },
+    { "id": "grade_univ_1", "educationLevel": "UNIVERSITY", "gradeCode": "UNIV-1", "displayName": "Universitas Semester 1" }
+  ],
+  "subjects": [
+    {
+      "id": "subj_math",
+      "code": "mathematics",
+      "name": "Matematika",
+      "description": "Aljabar, bilangan, geometri, fungsi kuadrat, trigonometri, dan kalkulus."
+    },
+    {
+      "id": "subj_phys",
+      "code": "physics",
+      "name": "Fisika",
+      "description": "Besaran & satuan, kinematika, dinamika Newton, energi, gelombang, dan listrik."
+    }
+  ],
+  "topics": [
+    { "id": "top_algebra_linear", "subjectId": "subj_math", "code": "ALG-LIN", "name": "Aljabar · Persamaan Linear" },
+    { "id": "top_quadratic", "subjectId": "subj_math", "code": "ALG-QUAD", "name": "Aljabar · Fungsi & Persamaan Kuadrat" },
+    { "id": "top_geometry_tri", "subjectId": "subj_math", "code": "GEO-TRI", "name": "Geometri · Segitiga & Koordinat" },
+    { "id": "top_number_prime", "subjectId": "subj_math", "code": "NUM-PRIME", "name": "Bilangan · Bilangan Prima & Operasi" },
+    { "id": "top_calculus_deriv", "subjectId": "subj_math", "code": "CALC-DER", "name": "Kalkulus · Turunan Fungsi" },
+    { "id": "top_kinematics", "subjectId": "subj_phys", "code": "PHY-KIN", "name": "Kinematika · Gerak Lurus" },
+    { "id": "top_dynamics", "subjectId": "subj_phys", "code": "PHY-DYN", "name": "Dinamika · Hukum Newton" },
+    { "id": "top_units_si", "subjectId": "subj_phys", "code": "PHY-UNIT", "name": "Besaran & Satuan SI" }
+  ],
+  "competencies": [
+    { "id": "comp_solve_linear", "topicId": "top_algebra_linear", "code": "MAT-8-ALG-01", "description": "Menyelesaikan persamaan linear satu variabel dan model kontekstual" },
+    { "id": "comp_simplify_expr", "topicId": "top_algebra_linear", "code": "MAT-8-ALG-02", "description": "Menyederhanakan bentuk aljabar menggunakan sifat distributif" },
+    { "id": "comp_quadratic_graph", "topicId": "top_quadratic", "code": "MAT-10-FUN-01", "description": "Menganalisis grafik, titik puncak, dan akar fungsi kuadrat" },
+    { "id": "comp_cartesian_plot", "topicId": "top_geometry_tri", "code": "MAT-8-GEO-01", "description": "Menentukan dan memplot koordinat pada bidang Kartesius" },
+    { "id": "comp_triangle_angles", "topicId": "top_geometry_tri", "code": "MAT-7-GEO-02", "description": "Menghitung sudut dalam dan sifat bangun datar segitiga" },
+    { "id": "comp_prime_classify", "topicId": "top_number_prime", "code": "MAT-5-NUM-01", "description": "Mengklasifikasikan bilangan prima dan faktor positifnya" },
+    { "id": "comp_calc_derivative", "topicId": "top_calculus_deriv", "code": "MAT-U1-CAL-01", "description": "Menghitung turunan fungsi polinomial dan laju perubahan" },
+    { "id": "comp_glb_motion", "topicId": "top_kinematics", "code": "FIS-10-KIN-01", "description": "Menganalisis besaran kecepatan, jarak, dan percepatan pada GLB" },
+    { "id": "comp_newton_2", "topicId": "top_dynamics", "code": "FIS-10-DIN-02", "description": "Menerapkan Hukum II Newton F = m * a dalam eksperimen 2D" },
+    { "id": "comp_si_units", "topicId": "top_units_si", "code": "FIS-10-BES-01", "description": "Mengidentifikasi besaran fisika beserta satuan SI dan dimensinya" }
+  ]
+}

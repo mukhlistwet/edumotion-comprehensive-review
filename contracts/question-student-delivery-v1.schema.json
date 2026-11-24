@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edumotion.local/schemas/question-delivery-v1.schema.json",
+  "title": "EduMotion Student Question Delivery DTO v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "questionId",
+    "version",
+    "type",
+    "content",
+    "interaction",
+    "delivery"
+  ],
+  "properties": {
+    "questionId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "type": {
+      "enum": [
+        "single_choice",
+        "multiple_select",
+        "true_false",
+        "numeric",
+        "short_text",
+        "fill_blank",
+        "matching",
+        "ordering",
+        "drag_drop",
+        "graph_plot",
+        "formula_input",
+        "diagram_label",
+        "simulation",
+        "worked_solution"
+      ]
+    },
+    "content": {
+      "type": "object",
+      "required": [
+        "stem"
+      ],
+      "properties": {
+        "stem": {
+          "type": "string"
+        },
+        "instruction": {
+          "type": "string"
+        },
+        "media": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "interaction": {
+      "type": "object"
+    },
+    "delivery": {
+      "type": "object",
+      "properties": {
+        "hintAvailable": {
+          "type": "boolean"
+        },
+        "feedbackTiming": {
+          "enum": [
+            "immediate",
+            "after_question",
+            "after_submission",
+            "after_release",
+            "none"
+          ]
+        },
+        "responsePolicy": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

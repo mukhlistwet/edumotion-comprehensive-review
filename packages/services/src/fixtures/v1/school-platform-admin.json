@@ -1,0 +1,111 @@
+{
+  "fixtureVersion": "1.0.0",
+  "school": {
+    "classes": [
+      { "id": "cls_8a", "tenantId": "tenant_cendekia", "name": "VIII A", "grade": "SMP Kelas 8", "homeroomTeacher": "Sari Lestari, S.Pd.", "studentCount": 34, "activeCount": 31, "avgMastery": 78 },
+      { "id": "cls_10_ipa_1", "tenantId": "tenant_cendekia", "name": "X IPA 1", "grade": "SMA Kelas X", "homeroomTeacher": "Dr. Hendro Gunawan", "studentCount": 38, "activeCount": 36, "avgMastery": 88 },
+      { "id": "cls_11_ipa_2", "tenantId": "tenant_cendekia", "name": "XI IPA 2", "grade": "SMA Kelas XI", "homeroomTeacher": "Rina Amelia", "studentCount": 40, "activeCount": 32, "avgMastery": 79 },
+      { "id": "cls_12_ipa_1", "tenantId": "tenant_cendekia", "name": "XII IPA 1", "grade": "SMA Kelas XII", "homeroomTeacher": "Dina Kartika", "studentCount": 36, "activeCount": 34, "avgMastery": 71 },
+      { "id": "cls_pintar_1", "tenantId": "tenant_pintar", "name": "Kelas Intensif SMP-1", "grade": "SMP Kelas 8", "homeroomTeacher": "Farid Rahman", "studentCount": 24, "activeCount": 22, "avgMastery": 74 }
+    ],
+    "students": [
+      { "id": "usr_student_smp_free", "tenantId": "tenant_cendekia", "classId": "cls_8a", "name": "Bima Pratama", "nis": "20260801", "avgMastery": 64, "xp": 340, "status": "Aktif" },
+      { "id": "usr_student_sma_prem", "tenantId": "tenant_cendekia", "classId": "cls_10_ipa_1", "name": "Alex Wijaya", "nis": "20261001", "avgMastery": 79, "xp": 1250, "status": "Aktif" },
+      { "id": "stu_cendekia_3", "tenantId": "tenant_cendekia", "classId": "cls_10_ipa_1", "name": "Citra Maharani", "nis": "20261002", "avgMastery": 91, "xp": 1480, "status": "Aktif" },
+      { "id": "stu_cendekia_4", "tenantId": "tenant_cendekia", "classId": "cls_11_ipa_2", "name": "Dimas Saputra", "nis": "20261108", "avgMastery": 46, "xp": 510, "status": "Perlu Remedial" },
+      { "id": "stu_pintar_1", "tenantId": "tenant_pintar", "classId": "cls_pintar_1", "name": "Zaki Alamsyah", "nis": "PB-001", "avgMastery": 73, "xp": 620, "status": "Aktif" }
+    ],
+    "calendarEvents": [
+      { "id": "cal_1", "tenantId": "tenant_cendekia", "date": "2026-11-24", "time": "08.00", "title": "Tryout Matematika", "scopeLabel": "Kelas XII · 4 rombel", "tone": "blue" },
+      { "id": "cal_2", "tenantId": "tenant_cendekia", "date": "2026-11-24", "time": "10.30", "title": "Rapat Guru IPA", "scopeLabel": "Ruang rapat · 12 peserta", "tone": "purple" },
+      { "id": "cal_3", "tenantId": "tenant_cendekia", "date": "2026-11-25", "time": "13.00", "title": "Review Hasil Asesmen", "scopeLabel": "Tim kurikulum", "tone": "orange" }
+    ],
+    "workedSubmissions": [
+      {
+        "id": "sub_work_1",
+        "tenantId": "tenant_cendekia",
+        "classId": "cls_10_ipa_1",
+        "studentId": "usr_student_sma_prem",
+        "studentName": "Alex Wijaya",
+        "assessmentTitle": "UTS Fisika & Aljabar · Soal Uraian",
+        "questionId": "11111111-1111-4111-8111-000000000014",
+        "questionStem": "Jelaskan langkah penyelesaian persamaan 4x - 7 = 21 beserta alasan operasi pada kedua ruas!",
+        "studentAnswer": "Tambahkan 7 pada kedua ruas sehingga 4x = 28. Selanjutnya bagi kedua ruas dengan 4 untuk mendapatkan x = 7.",
+        "rubric": [
+          { "id": "rub_1", "criterion": "Mengidentifikasi operasi invers (+7 pada kedua ruas)", "maxPoints": 5 },
+          { "id": "rub_2", "criterion": "Menyederhanakan menjadi 4x = 28 dengan tepat", "maxPoints": 5 },
+          { "id": "rub_3", "criterion": "Membagi kedua ruas dengan 4 dan menyimpulkan x = 7", "maxPoints": 5 }
+        ],
+        "status": "pending_review",
+        "awardedScores": null,
+        "reviewerNote": ""
+      }
+    ],
+    "counselingSignals": [
+      {
+        "id": "cns_1",
+        "tenantId": "tenant_cendekia",
+        "classId": "cls_11_ipa_2",
+        "studentId": "stu_cendekia_4",
+        "studentName": "Dimas Saputra",
+        "riskLevel": "Sedang",
+        "signal": "Penurunan mastery Dinamika (46/100) & 3 sesi latihan tertunda berturut-turut.",
+        "status": "open",
+        "notes": []
+      }
+    ],
+    "customRoles": [
+      {
+        "id": "crole_lab_coord",
+        "tenantId": "tenant_cendekia",
+        "name": "Koordinator Lab Fisika",
+        "permissions": ["school.view_dashboard", "school.manage_subjects", "school.view_reports"]
+      }
+    ]
+  },
+  "platform": {
+    "dailyActiveTrend": [
+      { "day": "Kam", "activeUsers": 18200 },
+      { "day": "Jum", "activeUsers": 21400 },
+      { "day": "Sab", "activeUsers": 19600 },
+      { "day": "Min", "activeUsers": 25800 },
+      { "day": "Sen", "activeUsers": 24100 },
+      { "day": "Sel", "activeUsers": 28900 },
+      { "day": "Rab", "activeUsers": 31640 }
+    ],
+    "systemHealth": [
+      { "service": "API & Backend Gateway", "metric": "99,98% uptime", "status": "Normal" },
+      { "service": "PostgreSQL Primary", "metric": "Latency 24 ms", "status": "Normal" },
+      { "service": "AI Orchestrator Queue", "metric": "18 jobs aktif", "status": "Perhatian" },
+      { "service": "Object Storage Media", "metric": "42% terpakai", "status": "Normal" }
+    ],
+    "plans": [
+      { "id": "freemium", "name": "Freemium", "audience": "B2C Siswa", "priceIdr": 0, "features": ["Akses jalur belajar dasar", "3 template Journey dasar", "Latihan harian terbatas"] },
+      { "id": "premium", "name": "EduMotion Premium", "audience": "B2C Siswa", "priceIdr": 79000, "features": ["Semua 6 template Journey terbuka", "Tryout & analisis kompetensi lengkap", "Kuota latihan tanpa batas"] },
+      { "id": "family", "name": "EduMotion Family", "audience": "B2C Orang Tua + 3 Anak", "priceIdr": 149000, "features": ["Hingga 3 akun anak", "Portal pantau Orang Tua", "Semua fitur Premium"] },
+      { "id": "institution_pro", "name": "Institution Pro", "audience": "B2B Sekolah", "priceIdr": 2500000, "features": ["Portal sekolah multi-peran", "AI Question Generator dengan kuota sekolah", "Ujian resmi & laporan kompetensi rombel"] }
+    ],
+    "auditLogs": [
+      {
+        "id": "aud_1",
+        "occurredAt": "2026-11-23T15:12:00Z",
+        "actorId": "usr_publisher_a",
+        "actorName": "Dina Kartika",
+        "tenantId": "tenant_cendekia",
+        "action": "QUESTION_PUBLISHED",
+        "targetId": "11111111-1111-4111-8111-000000000001",
+        "reason": "Lolos review SME Matematika."
+      },
+      {
+        "id": "aud_2",
+        "occurredAt": "2026-11-24T08:00:00Z",
+        "actorId": "usr_platform_super",
+        "actorName": "Super Admin",
+        "tenantId": "tenant_harapan",
+        "action": "INSTITUTION_ONBOARDING_REVIEW",
+        "targetId": "tenant_harapan",
+        "reason": "Verifikasi dokumen akreditasi SMP Harapan Bangsa."
+      }
+    ]
+  }
+}

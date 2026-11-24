@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edumotion.local/schemas/journey-view-v1.schema.json",
+  "title": "EduMotion Canonical Journey View Model v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "journeyId",
+    "pathId",
+    "chapter",
+    "template",
+    "nodes",
+    "progress"
+  ],
+  "properties": {
+    "journeyId": {
+      "type": "string"
+    },
+    "pathId": {
+      "type": "string"
+    },
+    "chapter": {
+      "type": "object",
+      "required": [
+        "id",
+        "sequence",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "in_progress",
+            "completed",
+            "archived"
+          ]
+        },
+        "startedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": true
+    },
+    "template": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "selectionMode"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "adventure",
+            "board",
+            "explore",
+            "skill",
+            "racing",
+            "galaxy"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "selectionMode": {
+          "enum": [
+            "adaptive",
+            "personal",
+            "random",
+            "admin"
+          ]
+        },
+        "layoutConfig": {
+          "type": "object"
+        },
+        "selectionReason": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "sequence",
+          "kind",
+          "status",
+          "title"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "kind": {
+            "enum": [
+              "lesson",
+              "practice",
+              "challenge",
+              "simulation",
+              "assessment",
+              "boss",
+              "milestone"
+            ]
+          },
+          "status": {
+            "enum": [
+              "locked",
+              "available",
+              "in_progress",
+              "completed"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "activityIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "prerequisiteNodeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rewardPreview": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "progress": {
+      "type": "object",
+      "required": [
+        "completedNodes",
+        "totalNodes"
+      ],
+      "properties": {
+        "completedNodes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalNodes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completionRatio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "currentNodeId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "reducedMotion": {
+          "type": "boolean"
+        },
+        "highContrast": {
+          "type": "boolean"
+        },
+        "textScale": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

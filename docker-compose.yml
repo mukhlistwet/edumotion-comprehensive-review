@@ -1,0 +1,55 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: edumotion-postgres
+    environment:
+      POSTGRES_DB: edumotion
+      POSTGRES_USER: edumotion
+      POSTGRES_PASSWORD: edumotion_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - edumotion_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U edumotion -d edumotion"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: edumotion-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+    container_name: edumotion-api
+    working_dir: /app
+    command: ["npm", "--workspace=@edumotion/api", "run", "start"]
+    environment:
+      NODE_ENV: development
+      PORT: "4000"
+      HOST: "0.0.0.0"
+      DATABASE_URL: "postgres://edumotion:edumotion_dev_password@postgres:5432/edumotion"
+      REDIS_URL: "redis://redis:6379"
+      JWT_SECRET: "change-me-in-production-min-32-chars-secret"
+      ALLOWED_ORIGINS: "http://127.0.0.1:4173,http://127.0.0.1:4175,http://localhost:5173"
+      ALLOW_DEMO_PERSONA_LOGIN: "true"
+      AUTO_SEED_DEMO: "true"
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  edumotion_pgdata:

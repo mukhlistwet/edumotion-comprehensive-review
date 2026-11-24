@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EduMotion — Manual Question Builder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{brand:'#58CC02',ink:'#172B4D',sky:'#1CB0F6',violet:'#A560E8',orange:'#FF9600'},fontFamily:{sans:['Nunito Sans','ui-sans-serif','system-ui']}}}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box} body{font-family:'Nunito Sans',sans-serif;background:#f5f7fb;color:#172b4d}
+.panel{background:white;border:1px solid #e5eaf2;border-radius:16px}.field{width:100%;border:1px solid #dce3ed;border-radius:10px;padding:10px 12px;background:#fff;outline:none}.field:focus{border-color:#1cb0f6;box-shadow:0 0 0 3px #1cb0f622}
+.btn{border-radius:10px;padding:9px 14px;font-weight:800;font-size:13px}.btn-primary{background:#58cc02;color:#173400}.btn-soft{background:#eef3f9;color:#344766}.btn-outline{border:1px solid #dce3ed;background:white}.tab{padding:10px 12px;border-bottom:3px solid transparent;font-weight:800;font-size:13px;color:#71809a;white-space:nowrap}.tab.active{border-color:#58cc02;color:#172b4d}
+.pill{font-size:11px;font-weight:800;border-radius:99px;padding:4px 9px;background:#eef3f9;color:#52627d}.step{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900;background:#edf2f8;color:#66758d}.step.active{background:#58cc02;color:#173400}
+.choice{border:1px solid #dce3ed;border-radius:12px;padding:11px;display:flex;gap:10px;align-items:center;cursor:pointer}.choice.selected{border-color:#58cc02;background:#f5ffec}
+.drop{border:2px dashed #cbd5e1;border-radius:12px;padding:22px;text-align:center;color:#71809a;background:#fafcff}
+.sidebar-link{padding:10px 12px;border-radius:10px;color:#687892;font-size:13px;font-weight:800}.sidebar-link.active{background:#effbe7;color:#326e00}
+.mini{font-size:11px;color:#77859b}.hide{display:none!important}
+</style>
+</head>
+<body>
+<header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-5 sticky top-0 z-30">
+ <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-brand grid place-items-center text-xl">✦</div><div><div class="font-black text-lg">EduMotion <span class="text-slate-400 font-semibold text-sm">/ Question Studio</span></div><div class="mini">Content management workspace</div></div></div>
+ <div class="flex items-center gap-3"><span class="pill">Draft · Autosave demo</span><button class="btn btn-outline" onclick="toast('Preview siap dibuka')">Preview</button><button class="btn btn-primary" onclick="publish()">Publish question</button><div class="w-9 h-9 rounded-full bg-violet text-white grid place-items-center font-black">GA</div></div>
+</header>
+<div class="flex min-h-screen">
+<aside class="hidden lg:block w-60 bg-white border-r border-slate-200 p-4">
+ <div class="text-xs uppercase tracking-wider text-slate-400 font-black px-3 mb-3 mt-2">Content</div>
+ <div class="sidebar-link">▦ Dashboard</div><div class="sidebar-link active">✎ Question Builder</div><div class="sidebar-link">▤ Question Bank</div><div class="sidebar-link">◫ Assessment</div><div class="sidebar-link">⌁ Curriculum</div>
+ <div class="text-xs uppercase tracking-wider text-slate-400 font-black px-3 mb-3 mt-8">Manage</div><div class="sidebar-link">♙ Review Queue</div><div class="sidebar-link">⚙ Settings</div>
+ <div class="mt-10 p-3 rounded-xl bg-slate-50"><div class="font-extrabold text-sm">Question quality</div><div class="mini mt-1">Lengkapi metadata dan validasi sebelum publikasi.</div><div class="h-2 rounded-full bg-slate-200 mt-3"><div class="h-2 rounded-full bg-brand w-2/3"></div></div><div class="mini mt-1">Demo checklist · 4/6</div></div>
+</aside>
+<main class="flex-1 min-w-0 p-4 md:p-7 max-w-[1500px] mx-auto w-full">
+ <div class="flex flex-wrap justify-between items-start gap-3 mb-5"><div><div class="text-sm text-slate-500 font-bold">Question Bank / Create new</div><h1 class="text-2xl md:text-3xl font-black mt-1">Buat soal baru</h1><p class="text-sm text-slate-500 mt-1">Susun soal, kunci jawaban, rubrik, dan pengalaman pengerjaan siswa.</p></div><div class="flex gap-2"><button class="btn btn-outline" onclick="toast('Draft disimpan (simulasi)')">Save draft</button><button class="btn btn-primary" onclick="validateAll()">Validate question</button></div></div>
+ <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_300px] gap-5">
+ <section class="min-w-0">
+  <div class="panel p-4 md:p-5 mb-4">
+   <div class="flex items-center justify-between mb-4"><div class="font-black">Question setup</div><span class="pill">Step 1–2</span></div>
+   <div class="grid md:grid-cols-2 gap-4">
+    <label class="text-xs font-extrabold">Judul internal<input id="qtitle" class="field mt-1" value="Latihan Persamaan Linear"></label>
+    <label class="text-xs font-extrabold">Kode soal<input id="qcode" class="field mt-1" value="MAT-SMP-ALG-001"></label>
+    <label class="text-xs font-extrabold">Subject<select class="field mt-1"><option>Mathematics</option><option>Physics</option></select></label>
+    <label class="text-xs font-extrabold">Curriculum<select class="field mt-1"><option>Kurikulum Merdeka</option><option>Cambridge</option><option>IB</option><option>Custom / Institution</option></select></label>
+    <label class="text-xs font-extrabold">Jenjang<select class="field mt-1"><option>SMP</option><option>SD</option><option>SMA</option><option>Universitas</option></select></label>
+    <label class="text-xs font-extrabold">Kelas / Grade<select class="field mt-1"><option>Kelas 7</option><option>Kelas 8</option><option>Kelas 9</option></select></label>
+    <label class="text-xs font-extrabold">Topik<select class="field mt-1"><option>Aljabar → Persamaan linear satu variabel</option><option>Bilangan</option><option>Geometri</option></select></label>
+    <label class="text-xs font-extrabold">Kompetensi<input class="field mt-1" value="Menyelesaikan persamaan linear satu variabel"></label>
+   </div>
+   <div class="grid md:grid-cols-3 gap-4 mt-4">
+    <label class="text-xs font-extrabold">Difficulty<select class="field mt-1"><option>Easy</option><option selected>Medium</option><option>Hard</option><option>Advanced</option></select></label>
+    <label class="text-xs font-extrabold">Cognitive level<select class="field mt-1"><option>C2 · Understand</option><option selected>C3 · Apply</option><option>C4 · Analyze</option><option>C5 · Evaluate</option><option>C6 · Create</option></select></label>
+    <label class="text-xs font-extrabold">Estimasi waktu<input class="field mt-1" type="number" value="90"></label>
+   </div>
+  </div>
+  <div class="panel mb-4">
+   <div class="flex overflow-x-auto border-b border-slate-100 px-2">
+    <button class="tab active" data-tab="content">1. Konten soal</button><button class="tab" data-tab="answer">2. Jawaban</button><button class="tab" data-tab="scoring">3. Penilaian</button><button class="tab" data-tab="solution">4. Pembahasan</button><button class="tab" data-tab="settings">5. Pengaturan</button>
+   </div>
+   <div id="content" class="p-4 md:p-5 tabpane">
+    <div class="flex items-center justify-between mb-3"><div><h2 class="font-black">Question content</h2><p class="mini">Tulis instruksi yang jelas dan sesuai usia siswa.</p></div><span class="pill">Required</span></div>
+    <label class="block text-xs font-extrabold mb-2">Question type</label>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-5" id="types">
+     <button class="choice selected text-left" data-type="single_choice"><span>🔘</span><span class="text-xs font-extrabold">Single choice</span></button>
+     <button class="choice text-left" data-type="multiple_select"><span>☑️</span><span class="text-xs font-extrabold">Multiple select</span></button>
+     <button class="choice text-left" data-type="numeric"><span>🔢</span><span class="text-xs font-extrabold">Numeric</span></button>
+     <button class="choice text-left" data-type="true_false"><span>⚖️</span><span class="text-xs font-extrabold">True / False</span></button>
+     <button class="choice text-left" data-type="fill_blank"><span>▱</span><span class="text-xs font-extrabold">Fill blank</span></button>
+     <button class="choice text-left" data-type="matching"><span>↔️</span><span class="text-xs font-extrabold">Matching</span></button>
+     <button class="choice text-left" data-type="ordering"><span>↕️</span><span class="text-xs font-extrabold">Ordering</span></button>
+     <button class="choice text-left" data-type="formula_input"><span>∑</span><span class="text-xs font-extrabold">Formula input</span></button>
+     <button class="choice text-left" data-type="graph_plot"><span>📈</span><span class="text-xs font-extrabold">Graph plot</span></button>
+     <button class="choice text-left" data-type="diagram_label"><span>📐</span><span class="text-xs font-extrabold">Diagram label</span></button>
+     <button class="choice text-left" data-type="simulation"><span>🧪</span><span class="text-xs font-extrabold">Simulation</span></button>
+     <button class="choice text-left" data-type="essay"><span>✍️</span><span class="text-xs font-extrabold">Essay / solution</span></button>
+    </div>
+    <label class="block text-xs font-extrabold">Instruksi / stem soal</label>
+    <textarea id="stem" rows="4" class="field mt-1" placeholder="Tuliskan pertanyaan utama...">Tentukan nilai x dari persamaan 3x + 5 = 20.</textarea>
+    <div class="flex flex-wrap gap-2 mt-2"><button class="btn btn-soft" onclick="insertText('stem','\\(3x + 5 = 20\\)')">∑ Insert formula</button><button class="btn btn-soft" onclick="toast('Media picker demo')">▧ Add image / media</button><button class="btn btn-soft" onclick="toast('Diagram editor demo')">◇ Add diagram</button><button class="btn btn-soft" onclick="toast('Accessibility helper demo')">♿ Alt text</button></div>
+    <div class="grid md:grid-cols-2 gap-4 mt-4">
+     <label class="text-xs font-extrabold">Petunjuk tambahan (opsional)<textarea class="field mt-1" rows="2" placeholder="Contoh: Gunakan operasi invers..."></textarea></label>
+     <label class="text-xs font-extrabold">Sumber / referensi internal<input class="field mt-1" placeholder="Buku, halaman, dokumen, atau sumber"></label>
+    </div>
+    <div class="mt-4"><div class="text-xs font-extrabold mb-2">Media & attachments</div><div class="drop"><div class="text-2xl mb-1">＋</div><div class="font-extrabold text-sm">Drop image, audio, video, atau file di sini</div><div class="mini">PNG, JPG, SVG, MP3, MP4 · demo uploader</div><button class="btn btn-outline mt-3" onclick="toast('File picker demo')">Choose file</button></div></div>
+    <div class="mt-4 p-3 bg-slate-50 rounded-xl"><div class="text-xs font-extrabold mb-1">Preview konten</div><div id="stemPreview" class="text-sm">Tentukan nilai x dari persamaan 3x + 5 = 20.</div><div class="mini mt-2">Formula ditampilkan melalui KaTeX pada implementasi produksi.</div></div>
+   </div>
+   <div id="answer" class="p-4 md:p-5 tabpane hide">
+    <div class="flex justify-between items-center mb-3"><div><h2 class="font-black">Answer configuration</h2><p class="mini">Atur opsi, jawaban benar, toleransi, dan validasi.</p></div><span class="pill">Required</span></div>
+    <div id="answerEditor">
+     <div class="text-xs font-extrabold mb-2">Pilihan jawaban</div><div id="options" class="space-y-2">
+      <div class="flex gap-2 items-center"><input type="radio" name="correct" checked><input class="field" value="3"><button class="btn btn-outline" onclick="this.parentElement.remove()">✕</button></div>
+      <div class="flex gap-2 items-center"><input type="radio" name="correct"><input class="field" value="5"><button class="btn btn-outline" onclick="this.parentElement.remove()">✕</button></div>
+      <div class="flex gap-2 items-center"><input type="radio" name="correct"><input class="field" value="7"><button class="btn btn-outline" onclick="this.parentElement.remove()">✕</button></div>
+      <div class="flex gap-2 items-center"><input type="radio" name="correct"><input class="field" value="10"><button class="btn btn-outline" onclick="this.parentElement.remove()">✕</button></div>
+     </div><button class="btn btn-soft mt-3" onclick="addOption()">＋ Add option</button>
+     <div class="grid md:grid-cols-2 gap-3 mt-5"><label class="text-xs font-extrabold">Randomize options<select class="field mt-1"><option>Yes</option><option>No</option></select></label><label class="text-xs font-extrabold">Answer required<select class="field mt-1"><option>Yes</option><option>No</option></select></label></div>
+    </div>
+    <div class="mt-5 p-3 rounded-xl bg-blue-50 text-blue-900 text-xs"><b>Authoring rule:</b> jawaban benar dan konfigurasi scoring harus tersimpan terpisah dari payload yang dikirim ke siswa. Jangan kirim answer key pada endpoint delivery.</div>
+   </div>
+   <div id="scoring" class="p-4 md:p-5 tabpane hide">
+    <h2 class="font-black">Scoring & validation</h2><p class="mini mb-4">Tentukan bagaimana jawaban dinilai, termasuk partial credit.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+     <label class="text-xs font-extrabold">Maximum points<input class="field mt-1" type="number" value="10"></label>
+     <label class="text-xs font-extrabold">Scoring method<select class="field mt-1"><option>Exact match</option><option>Partial credit</option><option>Weighted rubric</option><option>Manual grading</option></select></label>
+     <label class="text-xs font-extrabold">Negative marking<select class="field mt-1"><option>None</option><option>Enabled</option></select></label>
+     <label class="text-xs font-extrabold">Penalty per wrong answer<input class="field mt-1" type="number" value="0" step=".25"></label>
+     <label class="text-xs font-extrabold">Numeric tolerance<input class="field mt-1" value="±0.01" placeholder="e.g. 0.01"></label>
+     <label class="text-xs font-extrabold">Unit handling<select class="field mt-1"><option>Required and validated</option><option>Optional</option><option>Ignore unit</option></select></label>
+    </div>
+    <div class="mt-5 font-extrabold text-sm">Partial credit rules</div><div class="border border-slate-200 rounded-xl p-3 mt-2 space-y-2"><label class="flex gap-2 text-xs"><input type="checkbox" checked> Beri nilai parsial untuk langkah/proses yang benar</label><label class="flex gap-2 text-xs"><input type="checkbox"> Penalti untuk jawaban dengan satuan salah</label><label class="flex gap-2 text-xs"><input type="checkbox" checked> Normalisasi format angka (koma/titik desimal)</label></div>
+    <div class="mt-5 font-extrabold text-sm">Rubric (essay / worked solution)</div><div class="grid grid-cols-[1fr_90px] gap-2 mt-2"><input class="field" value="Konsep dan metode benar"><input class="field" value="4 pts"><input class="field" value="Langkah penyelesaian logis"><input class="field" value="3 pts"><input class="field" value="Hasil akhir dan satuan benar"><input class="field" value="3 pts"></div><button class="btn btn-soft mt-2" onclick="toast('Rubric row ditambahkan (demo)')">＋ Add rubric criterion</button>
+   </div>
+   <div id="solution" class="p-4 md:p-5 tabpane hide">
+    <h2 class="font-black">Explanation & feedback</h2><p class="mini mb-4">Pembahasan dapat ditampilkan setelah jawaban atau setelah assessment ditutup.</p>
+    <label class="block text-xs font-extrabold">Pembahasan lengkap<textarea class="field mt-1" rows="4">3x + 5 = 20
+3x = 20 - 5
+3x = 15
+x = 5</textarea></label>
+    <div class="grid md:grid-cols-2 gap-4 mt-4"><label class="text-xs font-extrabold">Feedback jawaban benar<textarea class="field mt-1" rows="3">Tepat! Kurangi 5 dari kedua sisi, lalu bagi 3.</textarea></label><label class="text-xs font-extrabold">Feedback jawaban salah<textarea class="field mt-1" rows="3">Periksa kembali operasi invers dan urutan langkahmu.</textarea></label></div>
+    <label class="block text-xs font-extrabold mt-4">Common misconception<input class="field mt-1" value="Lupa mengurangi 5 sebelum membagi dengan 3"></label>
+    <label class="block text-xs font-extrabold mt-4">Remediation / materi rekomendasi<input class="field mt-1" placeholder="Pilih lesson atau competency untuk remediasi"></label>
+   </div>
+   <div id="settings" class="p-4 md:p-5 tabpane hide">
+    <h2 class="font-black">Delivery & governance</h2><p class="mini mb-4">Atur perilaku soal saat digunakan dalam lesson, practice, challenge, atau ujian.</p>
+    <div class="grid md:grid-cols-2 gap-4">
+     <label class="text-xs font-extrabold">Allowed modes<select class="field mt-1" multiple size="4"><option selected>Lesson</option><option selected>Practice</option><option selected>Daily challenge</option><option selected>Tryout / UTS / UAS</option></select></label>
+     <label class="text-xs font-extrabold">Feedback timing<select class="field mt-1"><option>Immediately after answer</option><option>After question set</option><option>After assessment closes</option><option>Never reveal automatically</option></select></label>
+     <label class="text-xs font-extrabold">Status<select class="field mt-1"><option>Draft</option><option>In review</option><option>Approved</option><option>Archived</option></select></label>
+     <label class="text-xs font-extrabold">Visibility<select class="field mt-1"><option>Private / author only</option><option>Organization</option><option>Global question bank</option></select></label>
+     <label class="text-xs font-extrabold">Language<select class="field mt-1"><option>Bahasa Indonesia</option><option>English</option><option>Bilingual</option></select></label>
+     <label class="text-xs font-extrabold">Version<input class="field mt-1" value="1.0.0" readonly></label>
+    </div>
+    <div class="mt-4 p-3 rounded-xl bg-amber-50 text-amber-900 text-xs"><b>Exam security:</b> saat dipakai dalam ujian, buat immutable assessment snapshot. Timer dan submission harus server-authoritative. Kunci/pembahasan mengikuti release policy assessment.</div>
+    <div class="mt-4 font-extrabold text-sm">Accessibility checklist</div><div class="space-y-2 mt-2 text-xs"><label class="flex gap-2"><input type="checkbox" checked> Media memiliki alt text / transcript</label><label class="flex gap-2"><input type="checkbox" checked> Instruksi tidak hanya mengandalkan warna</label><label class="flex gap-2"><input type="checkbox"> Interaksi dapat dioperasikan dengan keyboard</label><label class="flex gap-2"><input type="checkbox"> Math expression memiliki accessible label</label></div>
+   </div>
+  </div>
+  <div class="flex justify-between"><button class="btn btn-outline" onclick="prevTab()">← Previous</button><button class="btn btn-primary" onclick="nextTab()">Continue →</button></div>
+ </section>
+ <aside class="space-y-4">
+  <div class="panel p-4"><div class="flex justify-between items-center"><div class="font-black">Live preview</div><span class="pill">Student view</span></div><div class="mt-4 p-4 rounded-xl bg-slate-50"><div class="flex justify-between"><span class="pill">Mathematics · Medium</span><span class="mini">90 sec</span></div><div class="font-extrabold mt-4 text-sm" id="previewQuestion">Tentukan nilai x dari persamaan 3x + 5 = 20.</div><div id="previewAnswers" class="space-y-2 mt-4"><button class="choice w-full text-left text-sm" onclick="selectPreview(this)">A. 3</button><button class="choice w-full text-left text-sm" onclick="selectPreview(this)">B. 5</button><button class="choice w-full text-left text-sm" onclick="selectPreview(this)">C. 7</button><button class="choice w-full text-left text-sm" onclick="selectPreview(this)">D. 10</button></div><button class="btn btn-primary w-full mt-4" onclick="toast('Jawaban preview dikirim (demo)')">Check answer</button></div><div class="mini mt-3">Preview hanya simulasi UI. Kunci jawaban tidak boleh tampil pada mode siswa.</div></div>
+  <div class="panel p-4"><div class="font-black mb-3">Completion checklist</div><div id="checklist" class="space-y-3 text-xs"><div class="flex gap-2"><span>✅</span> Metadata dasar</div><div class="flex gap-2"><span>✅</span> Tipe soal dipilih</div><div class="flex gap-2"><span>◯</span> Jawaban benar dikonfigurasi</div><div class="flex gap-2"><span>◯</span> Penilaian divalidasi</div><div class="flex gap-2"><span>◯</span> Pembahasan ditinjau</div><div class="flex gap-2"><span>◯</span> Aksesibilitas diperiksa</div></div></div>
+  <div class="panel p-4"><div class="font-black mb-2">Question metadata</div><div class="flex justify-between py-2 border-b border-slate-100 text-xs"><span class="text-slate-500">Question ID</span><b>Auto-generated</b></div><div class="flex justify-between py-2 border-b border-slate-100 text-xs"><span class="text-slate-500">Created by</span><b>Current user</b></div><div class="flex justify-between py-2 border-b border-slate-100 text-xs"><span class="text-slate-500">Last saved</span><b>Just now</b></div><div class="flex justify-between py-2 text-xs"><span class="text-slate-500">Revision</span><b>1</b></div></div>
+  <div class="panel p-4"><div class="font-black mb-2">Authoring tips</div><ul class="list-disc pl-4 text-xs text-slate-600 space-y-2"><li>Satu soal mengukur kompetensi yang jelas.</li><li>Hindari distraktor yang ambigu.</li><li>Gunakan satuan dan notasi secara konsisten.</li><li>Uji soal pada ukuran layar mobile.</li></ul></div>
+ </aside>
+ </div>
+</main>
+</div>
+<div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-ink text-white px-4 py-3 rounded-xl shadow-xl text-sm font-bold opacity-0 transition z-50"></div>
+<script>
+const tabs=['content','answer','scoring','solution','settings'];let current=0;let selectedType='single_choice';
+document.querySelectorAll('.tab').forEach((b,i)=>b.addEventListener('click',()=>showTab(i)));
+function showTab(i){current=Math.max(0,Math.min(tabs.length-1,i));document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('active',j===current));document.querySelectorAll('.tabpane').forEach((p,j)=>p.classList.toggle('hide',j!==current))}
+function nextTab(){showTab(current+1)}function prevTab(){showTab(current-1)}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.opacity=1;setTimeout(()=>t.style.opacity=0,1800)}
+function insertText(id,s){let e=document.getElementById(id);e.value+=' '+s;syncPreview()}
+function syncPreview(){let s=document.getElementById('stem').value;document.getElementById('stemPreview').textContent=s;document.getElementById('previewQuestion').textContent=s}
+document.getElementById('stem').addEventListener('input',syncPreview);
+document.querySelectorAll('#types button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#types button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selectedType=b.dataset.type;toast('Question type: '+selectedType.replace('_',' '));}));
+function addOption(){let d=document.createElement('div');d.className='flex gap-2 items-center';d.innerHTML='<input type="radio" name="correct"><input class="field" placeholder="Option text"><button class="btn btn-outline" onclick="this.parentElement.remove()">✕</button>';document.getElementById('options').appendChild(d)}
+function selectPreview(el){document.querySelectorAll('#previewAnswers .choice').forEach(x=>x.classList.remove('selected'));el.classList.add('selected')}
+function validateAll(){let missing=[];if(!document.getElementById('stem').value.trim())missing.push('stem soal');if(!document.querySelector('input[name="correct"]:checked'))missing.push('jawaban benar');if(missing.length)toast('Periksa: '+missing.join(', '));else toast('Validasi demo: tidak ada error dasar')}
+function publish(){toast('Demo: status publish belum terhubung ke API')}
+</script>
+</body></html>

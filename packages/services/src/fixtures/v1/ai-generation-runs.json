@@ -1,0 +1,145 @@
+{
+  "fixtureVersion": "1.0.0",
+  "runs": [
+    {
+      "id": "run_seed_completed",
+      "tenantId": "tenant_cendekia",
+      "requestedBy": "usr_author_a",
+      "status": "completed",
+      "progressPct": 100,
+      "estimatedCostUsd": 0.14,
+      "actualCostUsd": 0.12,
+      "budgetCapUsd": 1.0,
+      "maxRetries": 2,
+      "createdAt": "2026-11-23T10:00:00Z",
+      "completedAt": "2026-11-23T10:00:12Z",
+      "brief": {
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_solve_linear"],
+        "quantity": 2,
+        "difficultyDistribution": { "easy": 50, "medium": 50, "hard": 0 },
+        "questionTypes": ["single_choice"],
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "contextStyle": "contextual",
+        "instructions": "Buat soal kontekstual dengan distraktor berbasis miskonsepsi umum.",
+        "budgetCapUsd": 1.0,
+        "maxRetries": 2
+      },
+      "items": [
+        {
+          "id": "ai_item_001",
+          "runId": "run_seed_completed",
+          "status": "needs_review",
+          "attemptCount": 1,
+          "generation": {
+            "modelId": "edu-math-reasoner-v1",
+            "promptVersion": "qgen-v1.2",
+            "tokensUsed": 680,
+            "costUsd": 0.06
+          },
+          "validationReport": {
+            "passed": true,
+            "qualityScore": 94,
+            "findings": []
+          },
+          "question": {
+            "schemaVersion": "edumotion-question-v1",
+            "id": "22222222-2222-4222-8222-000000000001",
+            "version": 1,
+            "type": "single_choice",
+            "metadata": {
+              "code": "AI-ALG-001",
+              "title": "Draf AI · Harga Buku Tulis",
+              "curriculumId": "cur_merdeka",
+              "curriculumVersionId": "ver_merdeka_2026",
+              "gradeLevelId": "grade_smp_8",
+              "subjectId": "subj_math",
+              "topicId": "top_algebra_linear",
+              "competencyIds": ["comp_solve_linear"],
+              "difficulty": "easy",
+              "bloomLevel": "apply",
+              "locale": "id-ID",
+              "estimatedSeconds": 60
+            },
+            "content": {
+              "stem": "Rina membeli 3 buku tulis dan 1 penggaris seharga Rp5.000 dengan total pembayaran Rp20.000. Berapakah harga 1 buku tulis?",
+              "instruction": "Pilih satu jawaban yang tepat.",
+              "media": []
+            },
+            "interaction": {
+              "options": [
+                { "id": "opt_a", "label": "Rp3.000" },
+                { "id": "opt_b", "label": "Rp5.000" },
+                { "id": "opt_c", "label": "Rp6.000" },
+                { "id": "opt_d", "label": "Rp7.500" }
+              ]
+            },
+            "answerSpec": {
+              "correctOptionIds": ["opt_b"]
+            },
+            "scoring": {
+              "method": "exact_match",
+              "maxPoints": 10
+            },
+            "explanation": {
+              "steps": ["Misalkan harga buku = x, maka 3x + 5000 = 20000.", "3x = 15000 -> x = 5000."],
+              "hints": ["Kurangkan total harga dengan harga penggaris sebelum dibagi 3."],
+              "correctFeedback": "Tepat! Harga 1 buku tulis adalah Rp5.000.",
+              "incorrectFeedback": "Periksa pengurangan Rp20.000 - Rp5.000 terlebih dahulu."
+            },
+            "delivery": {
+              "allowedModes": ["practice", "challenge"],
+              "hintPolicy": "progressive",
+              "feedbackPolicy": "immediate"
+            },
+            "accessibility": {},
+            "governance": {
+              "status": "draft",
+              "tenantId": "tenant_cendekia",
+              "createdBy": "usr_author_a"
+            }
+          }
+        },
+        {
+          "id": "ai_item_002",
+          "runId": "run_seed_completed",
+          "status": "failed",
+          "attemptCount": 2,
+          "generation": {
+            "modelId": "edu-math-reasoner-v1",
+            "promptVersion": "qgen-v1.2",
+            "tokensUsed": 910,
+            "costUsd": 0.06
+          },
+          "validationReport": {
+            "passed": false,
+            "qualityScore": 35,
+            "findings": [
+              {
+                "stage": "domain_verifier",
+                "code": "DETERMINISTIC_CALCULATION_MISMATCH",
+                "severity": "blocking",
+                "message": "Verifikasi kalkulasi gagal: hasil deterministik=12, klaim model=14. Batas retry (2) tercapai."
+              }
+            ]
+          },
+          "question": null
+        }
+      ],
+      "auditTrail": [
+        { "timestamp": "2026-11-23T10:00:01Z", "actor": "system", "action": "RUN_QUEUED", "detail": "Generation brief divalidasi dan masuk antrean." },
+        { "timestamp": "2026-11-23T10:00:08Z", "actor": "verifier", "action": "ITEM_VERIFIED", "detail": "ai_item_001 lolos verifier deterministik; ai_item_002 gagal kalkulasi setelah 2 retry." }
+      ]
+    }
+  ],
+  "modelPolicies": [
+    { "id": "pol_auto", "label": "Provider Router · Otomatis", "estimatedCostPerItemUsd": 0.05 },
+    { "id": "pol_reasoning", "label": "Reasoning + Verifier Simbolik", "estimatedCostPerItemUsd": 0.09 },
+    { "id": "pol_fast", "label": "Fast Structured JSON Model", "estimatedCostPerItemUsd": 0.03 }
+  ]
+}

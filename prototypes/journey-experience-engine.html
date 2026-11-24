@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EduMotion — Journey Experience Engine</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--ink:#172b4d;--green:#58cc02;--blue:#1cb0f6;--purple:#a560e8;--orange:#ff9600}
+*{box-sizing:border-box}body{background:#f6f8fc;color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button{transition:.16s ease}button:focus-visible{outline:3px solid #1cb0f6;outline-offset:3px}
+.panel{background:white;border:1px solid #e5eaf2;border-radius:18px;box-shadow:0 5px 20px #172b4d0a}
+.pill{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
+.template-card{border:2px solid #e8edf5;border-radius:16px;padding:12px;text-align:left;background:white}
+.template-card.active{border-color:#58cc02;box-shadow:0 0 0 3px #58cc021c}
+.template-card.locked{opacity:.62}
+.world{min-height:430px;position:relative;overflow:hidden;border-radius:20px;padding:24px;color:white}
+.world.adventure{background:linear-gradient(145deg,#164e3d,#5c9d59 55%,#b8d982)}
+.world.board{background:linear-gradient(145deg,#293b75,#5d72b9)}
+.world.explore{background:radial-gradient(circle at 70% 25%,#405c9d,#17284f 68%,#101a38)}
+.world.skill{background:linear-gradient(145deg,#25204e,#654da2 60%,#a17bd1)}
+.world.racing{background:linear-gradient(145deg,#0e596b,#16a6a0 65%,#a0d9bd)}
+.world.galaxy{background:radial-gradient(circle at 25% 20%,#7553a5,#201b51 60%,#10142f)}
+.world:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ffffff20 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.world-inner{position:relative;z-index:1}
+.pathline{stroke:#fff9;stroke-width:9;stroke-linecap:round;stroke-dasharray:3 13;fill:none}
+.node{cursor:pointer;transition:transform .18s}.node:hover{transform:scale(1.12)}.node circle{stroke:white;stroke-width:4}
+.node text{font-size:11px;font-weight:800;fill:white;text-anchor:middle}
+.node.done circle{fill:#58cc02}.node.current circle{fill:#ffbd28;stroke:#fff}.node.locked circle{fill:#53617d}
+.node.current{filter:drop-shadow(0 0 10px #ffe28a)}
+.tile{fill:#ffffffeb;stroke:#d9e4ff;stroke-width:2}.tile.done .tile{fill:#bdf49a}.tile.locked{opacity:.55}
+.template-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;opacity:.8}
+@media(max-width:700px){.world{min-height:390px;padding:16px}.node text{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="max-w-7xl mx-auto p-4 md:p-7">
+<header class="flex flex-wrap items-center justify-between gap-3 mb-6">
+ <div><div class="flex items-center gap-2"><span class="text-2xl">🚀</span><span class="font-black text-xl">EduMotion</span><span class="pill bg-green-100 text-green-800">Journey Engine</span></div><p class="text-sm text-slate-500 mt-1">Satu progress belajar, banyak cara menjelajah.</p></div>
+ <div class="flex gap-2"><button id="randomBtn" class="rounded-xl bg-slate-900 text-white px-4 py-2 font-bold text-sm">Next chapter (demo) →</button><button id="resetBtn" class="rounded-xl border bg-white px-4 py-2 font-bold text-sm">Reset demo</button></div>
+</header>
+<div class="grid lg:grid-cols-[1fr_320px] gap-5">
+<main class="space-y-5">
+<section class="panel p-4 md:p-5">
+ <div class="flex flex-wrap justify-between gap-3 items-start"><div><p class="text-xs font-black tracking-widest text-slate-400 uppercase">Learning journey</p><h1 class="text-2xl font-black mt-1" id="chapterTitle">Matematika · Chapter 01</h1><p class="text-sm text-slate-500 mt-1" id="chapterSub">Petualangan Persamaan Linear</p></div><div class="text-right"><div class="text-sm font-bold" id="progressText">2 / 8 checkpoint</div><div class="w-36 h-2.5 bg-slate-100 rounded-full mt-2 overflow-hidden"><div id="progressBar" class="h-full bg-lime-500 rounded-full" style="width:25%"></div></div></div></div>
+ <div class="flex flex-wrap gap-2 mt-4 text-xs"><span class="pill bg-blue-50 text-blue-700">SMP · Kelas 8</span><span class="pill bg-violet-50 text-violet-700">Matematika</span><span class="pill bg-amber-50 text-amber-700" id="modeBadge">Adaptive mode</span><span class="pill bg-slate-100 text-slate-600" id="templateBadge">Adventure Journey</span></div>
+</section>
+<section id="world" class="world adventure">
+ <div class="world-inner flex items-start justify-between gap-3"><div><p class="template-label" id="worldEyebrow">The green realm</p><h2 class="text-2xl md:text-3xl font-black mt-1" id="worldTitle">Number Forest</h2><p class="text-sm text-white/80 mt-1" id="worldDesc">Ikuti jalan, selesaikan misi, dan capai puncak chapter.</p></div><div class="rounded-2xl bg-white/15 backdrop-blur px-3 py-2 text-center"><div class="text-2xl">🧭</div><div class="text-[10px] font-black">LEVEL 08</div></div></div>
+ <div id="mapCanvas" class="mt-3"></div>
+ <div class="world-inner flex flex-wrap items-center justify-between gap-2 mt-2"><div class="text-xs text-white/80">👆 Pilih checkpoint untuk melihat misi</div><div class="text-xs font-bold bg-black/20 rounded-full px-3 py-1" id="worldHint">2 misi selesai · 6 tersisa</div></div>
+</section>
+<section class="panel p-4 md:p-5">
+ <div class="flex flex-wrap justify-between items-center gap-2 mb-3"><div><h3 class="font-black text-lg">Pilih gaya perjalanan</h3><p class="text-xs text-slate-500">Preview bebas. Progress tidak akan berubah saat mengganti tampilan.</p></div><button id="showAll" class="text-sm font-bold text-blue-600">Lihat semua template</button></div>
+ <div id="templateGrid" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+ <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-4"><div><div class="font-bold text-sm">Mode perjalanan</div><div class="text-xs text-slate-500">Random berganti pada chapter baru.</div></div><div class="flex flex-wrap gap-2"><button data-mode="adaptive" class="mode-btn rounded-xl px-3 py-2 text-xs font-bold border">✨ Adaptive</button><button data-mode="personal" class="mode-btn rounded-xl px-3 py-2 text-xs font-bold border">❤️ Personal</button><button data-mode="random" class="mode-btn rounded-xl px-3 py-2 text-xs font-bold border">🎲 Random</button></div></div>
+ <p id="policyNote" class="text-xs text-slate-500 mt-3">Pergantian template dikunci selama chapter berjalan. Pilihan berlaku mulai chapter berikutnya.</p>
+</section>
+</main>
+<aside class="space-y-4">
+ <section class="panel p-5"><div class="flex items-center gap-3"><div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl">🧑‍🚀</div><div><div class="font-black">Explorer</div><div class="text-xs text-slate-500">Level 8 · Math explorer</div></div></div><div class="grid grid-cols-2 gap-2 mt-4"><div class="bg-amber-50 rounded-xl p-3"><div class="text-xl font-black text-amber-600" id="xp">340</div><div class="text-xs text-slate-500">Total XP</div></div><div class="bg-rose-50 rounded-xl p-3"><div class="text-xl font-black text-rose-500">🔥 5</div><div class="text-xs text-slate-500">Day streak</div></div></div></section>
+ <section class="panel p-5"><h3 class="font-black">Checkpoint terpilih</h3><div id="missionDetail" class="mt-3"><div class="text-3xl">🌱</div><div class="font-black mt-2">Start Camp</div><p class="text-sm text-slate-500 mt-1">Pilih checkpoint di peta untuk melihat detail misi.</p></div></section>
+ <section class="panel p-5"><h3 class="font-black">Template unlock</h3><p class="text-xs text-slate-500 mt-1">Hybrid: template dasar tersedia, tema spesial dibuka lewat achievement atau premium.</p><div class="mt-3 space-y-3" id="unlockList"></div></section>
+ <section class="rounded-2xl bg-slate-900 text-white p-5"><div class="text-xs uppercase tracking-widest text-white/50 font-black">Design principle</div><p class="font-bold mt-2">Ganti dunia, bukan progress.</p><p class="text-xs text-white/60 mt-2">XP, mastery, checkpoint, dan status lesson bersumber dari progression engine yang sama.</p></section>
+</aside>
+</div>
+</div>
+<div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-4 py-3 rounded-xl text-sm font-bold shadow-xl opacity-0 pointer-events-none transition"></div>
+<div id="modal" class="fixed inset-0 bg-slate-950/50 hidden items-center justify-center p-4 z-50"><div class="bg-white rounded-2xl max-w-md w-full p-5 shadow-2xl"><div class="flex justify-between items-start"><div><div class="text-xs uppercase tracking-widest text-slate-400 font-black">Mission preview</div><h3 id="modalTitle" class="text-xl font-black mt-1">Checkpoint</h3></div><button id="closeModal" class="text-2xl text-slate-400">×</button></div><p id="modalDesc" class="text-sm text-slate-500 mt-2"></p><div class="bg-blue-50 rounded-xl p-4 mt-4"><div class="font-bold text-sm">Tantangan singkat</div><p id="question" class="text-sm mt-2">Selesaikan persamaan: 2x + 4 = 12. Nilai x?</p><div class="grid grid-cols-2 gap-2 mt-3" id="answers"></div></div><div id="answerFeedback" class="text-sm font-bold mt-3 min-h-5"></div><button id="completeBtn" disabled class="w-full mt-3 rounded-xl bg-lime-500 disabled:bg-slate-200 disabled:text-slate-400 text-slate-900 font-black py-3">Selesaikan misi · +50 XP</button></div></div>
+<script>
+const templates=[
+{id:'adventure',name:'Adventure Journey',emoji:'🌲',world:'Number Forest',eyebrow:'The green realm',desc:'Ikuti jalan, selesaikan misi, dan capai puncak chapter.',unlock:'base',cls:'adventure'},
+{id:'board',name:'Board Game',emoji:'🎲',world:'Math Quest Board',eyebrow:'Roll into knowledge',desc:'Lompati petak, temukan bonus, dan taklukkan tantangan.',unlock:'base',cls:'board'},
+{id:'explore',name:'World Exploration',emoji:'🗺️',world:'The Lost Islands',eyebrow:'Explore the unknown',desc:'Buka wilayah baru dan temukan rahasia di setiap pulau.',unlock:'achievement',cls:'explore'},
+{id:'skill',name:'Skill Tree',emoji:'🌳',world:'Algebra Skill Tree',eyebrow:'Master your skills',desc:'Bangun kompetensi dari fondasi menuju penguasaan.',unlock:'base',cls:'skill'},
+{id:'racing',name:'Racing Track',emoji:'🏁',world:'Formula Circuit',eyebrow:'Ready, set, learn',desc:'Lewati checkpoint dan pacu progres belajarmu.',unlock:'premium',cls:'racing'},
+{id:'galaxy',name:'Galaxy Mission',emoji:'🚀',world:'Equation Galaxy',eyebrow:'Beyond the classroom',desc:'Jelajahi planet dan selesaikan misi antariksa.',unlock:'achievement',cls:'galaxy'}
+];
+const missions=[
+{title:'Start Camp',icon:'🏕️',desc:'Kenali variabel dan konstanta.',q:'Pada 2x + 4 = 12, berapa nilai x?',a:['2','4','6','8'],correct:1},
+{title:'Variable Woods',icon:'🌳',desc:'Identifikasi bentuk aljabar.',q:'Suku variabel pada 5a + 3 adalah…',a:['5','a','3','5a'],correct:3},
+{title:'Equation Bridge',icon:'🌉',desc:'Gunakan operasi kebalikan.',q:'Jika x − 7 = 5, nilai x adalah…',a:['−2','2','12','35'],correct:2},
+{title:'Balance Village',icon:'🏘️',desc:'Pahami prinsip kedua ruas persamaan.',q:'Jika 3x = 21, nilai x adalah…',a:['6','7','8','9'],correct:1},
+{title:'Word River',icon:'🌊',desc:'Ubah soal cerita menjadi persamaan.',q:'Dua kali bilangan adalah 18. Bilangannya?',a:['6','8','9','12'],correct:2},
+{title:'Strategy Mountain',icon:'⛰️',desc:'Selesaikan persamaan dua langkah.',q:'2x + 4 = 18. Nilai x?',a:['5','7','9','11'],correct:1},
+{title:'Expert Observatory',icon:'🔭',desc:'Terapkan persamaan dalam konteks.',q:'5x − 10 = 20. Nilai x?',a:['4','5','6','8'],correct:2},
+{title:'Champion Summit',icon:'🏆',desc:'Boss challenge: buktikan penguasaanmu.',q:'4(x − 2) = 24. Nilai x?',a:['6','7','8','10'],correct:2}
+];
+let state={mode:'adaptive',template:'adventure',pendingMode:null,pendingTemplate:null,completed:[0,1],xp:340,selected:0,unlocked:['adventure','board','skill'],chapter:1};
+const $=id=>document.getElementById(id);
+function toast(msg){$('toast').textContent=msg;$('toast').style.opacity=1;setTimeout(()=>$('toast').style.opacity=0,1900)}
+function unlocked(t){return t.unlock==='base'||state.unlocked.includes(t.id)||t.unlock==='premium'&&state.unlocked.includes(t.id)}
+function svgMap(){
+ const id=state.template, coords={
+ adventure:[[55,245],[130,205],[205,245],[280,175],[355,210],[430,135],[505,165],[585,85]],
+ board:[[55,235],[130,235],[205,175],[280,175],[355,235],[430,235],[505,145],[585,145]],
+ explore:[[65,220],[145,160],[220,245],[300,145],[380,225],[460,125],[535,205],[600,90]],
+ skill:[[75,245],[165,190],[255,235],[345,145],[435,190],[525,105],[600,145],[650,65]],
+ racing:[[55,220],[130,125],[210,130],[285,230],[365,235],[440,130],[520,125],[600,220]],
+ galaxy:[[55,230],[135,145],[220,220],[300,115],[385,210],[465,105],[550,190],[625,75]]
+ }[id];
+ let points=coords.map(p=>p.join(',')).join(' ');
+ let svg=`<svg viewBox="0 0 700 300" role="img" aria-label="Peta perjalanan dengan delapan checkpoint" class="w-full" style="max-height:330px"><polyline points="${points}" class="pathline"/>`;
+ coords.forEach((p,i)=>{let cls=state.completed.includes(i)?'done':i===state.completed.length?'current':'locked';let label=['Camp','Woods','Bridge','Village','River','Mountain','Tower','Boss'][i];svg+=`<g class="node ${cls}" data-node="${i}" transform="translate(${p[0]},${p[1]})"><circle r="${i===7?25:20}"/><text y="4">${state.completed.includes(i)?'✓':i+1}</text><text y="39">${label}</text></g>`});
+ svg+=`<g transform="translate(${coords[Math.min(state.completed.length,7)][0]},${coords[Math.min(state.completed.length,7)][1]-38})"><text text-anchor="middle" font-size="24">🧑‍🚀</text></g></svg>`;
+ return svg;
+}
+function boardMap(){let out='<div class="grid grid-cols-4 gap-2 md:gap-3 max-w-2xl mx-auto py-6">';missions.forEach((m,i)=>{let done=state.completed.includes(i),cur=i===state.completed.length;out+=`<button data-node="${i}" class="aspect-square rounded-2xl border-2 ${done?'bg-lime-300 text-slate-900 border-lime-100':cur?'bg-amber-300 text-slate-900 border-white':'bg-white/20 text-white border-white/30'} flex flex-col items-center justify-center"><span class="text-2xl">${m.icon}</span><b class="text-xs mt-1">${i+1}. ${m.title.split(' ')[0]}</b><span class="text-[10px]">${done?'Selesai':cur?'Aktif':'Terkunci'}</span></button>`});return out+'</div>'}
+function skillMap(){let out='<div class="flex flex-col items-center py-5 gap-2">';missions.forEach((m,i)=>{let done=state.completed.includes(i),cur=i===state.completed.length;out+=`<button data-node="${i}" class="rounded-full px-5 py-3 border-2 ${done?'bg-lime-300 text-slate-900':cur?'bg-amber-300 text-slate-900':'bg-white/15 text-white'} border-white/60 font-bold text-sm">${m.icon} ${m.title} ${done?'✓':cur?'•':'🔒'}</button>${i<7?'<div class="w-1 h-4 bg-white/60 rounded"></div>':''}`});return out+'</div>'}
+function renderMap(){let t=templates.find(x=>x.id===state.template);$('world').className='world '+t.cls;$('worldTitle').textContent=t.world;$('worldEyebrow').textContent=t.eyebrow;$('worldDesc').textContent=t.desc;$('templateBadge').textContent=t.name;$('worldHint').textContent=`${state.completed.length} misi selesai · ${8-state.completed.length} tersisa`;$('mapCanvas').innerHTML=state.template==='board'?boardMap():state.template==='skill'?skillMap():svgMap();document.querySelectorAll('[data-node]').forEach(el=>el.addEventListener('click',()=>selectMission(+el.dataset.node)));$('progressText').textContent=`${state.completed.length} / 8 checkpoint`;$('progressBar').style.width=(state.completed.length/8*100)+'%';}
+function renderCards(){ $('templateGrid').innerHTML=templates.map(t=>{let ok=unlocked(t),active=state.template===t.id;return `<button data-template="${t.id}" class="template-card ${active?'active':''} ${ok?'':'locked'}"><div class="flex justify-between items-center"><span class="text-2xl">${t.emoji}</span><span class="text-[10px] font-black ${ok?'text-green-700':'text-slate-500'}">${active?'AKTIF':ok?'TERSEDIA':'🔒 LOCKED'}</span></div><div class="font-black text-sm mt-2">${t.name}</div><div class="text-xs text-slate-500 mt-1">${t.unlock==='base'?'Template dasar':t.unlock==='premium'?'Premium / achievement':'Achievement / premium'}</div></button>`}).join('');document.querySelectorAll('[data-template]').forEach(el=>el.addEventListener('click',()=>chooseTemplate(el.dataset.template)));document.querySelectorAll('.mode-btn').forEach(b=>{let active=b.dataset.mode===state.mode;b.className='mode-btn rounded-xl px-3 py-2 text-xs font-bold border '+(active?'bg-slate-900 text-white border-slate-900':'bg-white text-slate-600');b.onclick=()=>{state.mode=b.dataset.mode;if(state.mode!=='personal')state.pendingTemplate=null;renderCards();toast('Mode '+state.mode+' aktif untuk chapter berikutnya.')}});}
+function renderUnlock(){ $('unlockList').innerHTML=templates.filter(t=>t.unlock!=='base').map(t=>`<div class="flex items-center gap-2 text-sm"><span>${t.emoji}</span><div class="flex-1"><div class="font-bold">${t.name}</div><div class="text-[11px] text-slate-500">${t.unlock==='premium'?'Premium atau achievement':'Selesaikan 4 misi untuk membuka'}</div></div><span class="text-xs">${unlocked(t)?'✓':'🔒'}</span></div>`).join('');}
+function render(){renderMap();renderCards();renderUnlock();$('xp').textContent=state.xp;$('modeBadge').textContent=state.mode==='adaptive'?'Adaptive mode':state.mode==='personal'?'Personal mode':'Random mode';}
+function chooseTemplate(id){let t=templates.find(x=>x.id===id);if(!unlocked(t)){toast('Template ini belum terbuka. Selesaikan achievement atau gunakan premium.');return}if(id===state.template){toast('Template ini sedang aktif.');return}state.pendingTemplate=id;state.mode='personal';renderCards();toast('Pilihan disimpan untuk chapter berikutnya. Mode Personal aktif; progress tetap aman.');}
+function selectMission(i){state.selected=i;let m=missions[i],done=state.completed.includes(i),available=i<=state.completed.length;$('missionDetail').innerHTML=`<div class="text-3xl">${m.icon}</div><div class="font-black mt-2">${m.title}</div><p class="text-sm text-slate-500 mt-1">${m.desc}</p><div class="text-xs font-bold mt-3 ${done?'text-green-700':available?'text-amber-700':'text-slate-400'}">${done?'✓ Sudah selesai':available?'● Siap dimainkan':'🔒 Selesaikan checkpoint sebelumnya'}</div><button id="openMission" ${available&&!done?'':'disabled'} class="w-full mt-3 rounded-xl py-2.5 font-black text-sm ${available&&!done?'bg-lime-500':'bg-slate-100 text-slate-400'}">${done?'Misi selesai':available?'Mulai misi':'Terkunci'}</button>`;if(available&&!done)$('openMission').onclick=()=>openModal(i);}
+function openModal(i){let m=missions[i];$('modalTitle').textContent=m.title;$('modalDesc').textContent=m.desc;$('question').textContent=m.q;$('answerFeedback').textContent='';$('completeBtn').disabled=true;$('completeBtn').dataset.index=i;$('answers').innerHTML=m.a.map((a,j)=>`<button data-answer="${j}" class="rounded-xl border bg-white p-3 text-sm font-bold hover:border-blue-400">${a}</button>`).join('');document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{let correct=+b.dataset.answer===m.correct;$('answerFeedback').textContent=correct?'✓ Tepat! Kamu siap menyelesaikan misi.':'Belum tepat. Coba periksa kembali langkahmu.';$('answerFeedback').className='text-sm font-bold mt-3 min-h-5 '+(correct?'text-green-700':'text-rose-600');$('completeBtn').disabled=!correct});$('modal').classList.remove('hidden');$('modal').classList.add('flex');}
+function closeModal(){$('modal').classList.add('hidden');$('modal').classList.remove('flex')}
+$('closeModal').onclick=closeModal;$('completeBtn').onclick=()=>{let i=+$('completeBtn').dataset.index;if(!state.completed.includes(i)){state.completed.push(i);state.xp+=50;if(state.completed.length>=4&&!state.unlocked.includes('explore'))state.unlocked.push('explore');if(state.completed.length>=6&&!state.unlocked.includes('galaxy'))state.unlocked.push('galaxy');}closeModal();render();selectMission(Math.min(state.completed.length,7));toast('Misi selesai! +50 XP · Progress tersimpan di demo.');};
+function nextChapter(){state.chapter++;state.completed=[];let next;if(state.mode==='random'){let choices=templates.filter(t=>unlocked(t));next=choices[Math.floor(Math.random()*choices.length)].id}else if(state.mode==='personal'){next=state.pendingTemplate||state.template}else{let pool=['adventure','board','explore','skill','racing','galaxy'].filter(id=>unlocked(templates.find(t=>t.id===id)));let grade='SMP';next=grade==='SMP'?(pool.includes('adventure')?'adventure':pool[0]):pool[0]}state.template=next;state.pendingTemplate=null;$('chapterTitle').textContent=`Matematika · Chapter ${String(state.chapter).padStart(2,'0')}`;$('chapterSub').textContent='Chapter baru · template diterapkan';render();selectMission(0);toast('Chapter baru dimulai. Template: '+templates.find(t=>t.id===next).name);}
+$('randomBtn').onclick=()=>{nextChapter()};
+$('showAll').onclick=()=>toast('Semua template ditampilkan. Template terkunci ditandai dengan ikon gembok.');
+$('resetBtn').onclick=()=>{state={mode:'adaptive',template:'adventure',pendingMode:null,pendingTemplate:null,completed:[0,1],xp:340,selected:0,unlocked:['adventure','board','skill'],chapter:1};$('chapterTitle').textContent='Matematika · Chapter 01';render();selectMission(0);toast('Demo direset.')};
+render();selectMission(0);
+</script>
+</body></html>

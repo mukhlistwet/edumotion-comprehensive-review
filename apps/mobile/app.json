@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "EduMotion",
+    "slug": "edumotion-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "edumotion",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "id.edumotion.mobile"
+    },
+    "android": {
+      "package": "id.edumotion.mobile"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
+}

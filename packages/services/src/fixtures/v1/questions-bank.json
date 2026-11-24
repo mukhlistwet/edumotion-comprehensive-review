@@ -1,0 +1,1302 @@
+{
+  "fixtureVersion": "1.0.0",
+  "questions": [
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000001",
+      "version": 1,
+      "type": "single_choice",
+      "metadata": {
+        "code": "MAT-SMP-ALG-001",
+        "title": "Persamaan Linear Satu Variabel Dasar",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_solve_linear"],
+        "difficulty": "easy",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 60,
+        "tags": ["aljabar", "persamaan-linear"]
+      },
+      "content": {
+        "stem": "Tentukan nilai \\(x\\) yang memenuhi persamaan \\(3x + 5 = 20\\).",
+        "instruction": "Pilih satu jawaban yang paling tepat.",
+        "media": []
+      },
+      "interaction": {
+        "options": [
+          { "id": "opt_a", "label": "3" },
+          { "id": "opt_b", "label": "5" },
+          { "id": "opt_c", "label": "7" },
+          { "id": "opt_d", "label": "10" }
+        ],
+        "shuffleOptions": true
+      },
+      "answerSpec": {
+        "correctOptionIds": ["opt_b"]
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10,
+        "negativeMarking": 0
+      },
+      "explanation": {
+        "steps": [
+          "Kurangi kedua ruas dengan 5: \\(3x = 20 - 5 = 15\\)",
+          "Bagi kedua ruas dengan 3: \\(x = \\frac{15}{3} = 5\\)"
+        ],
+        "hints": [
+          "Isolasi suku yang mengandung variabel x terlebih dahulu.",
+          "Gunakan operasi kebalikan dari +5 pada kedua ruas persamaan."
+        ],
+        "correctFeedback": "Tepat sekali! Kamu menerapkan operasi invers dengan benar.",
+        "incorrectFeedback": "Belum tepat. Ingat untuk mengurangkan 5 sebelum membagi dengan 3.",
+        "misconceptions": ["Membagi 20 langsung dengan 3 tanpa mengurangi konstanta 5"],
+        "remediationCompetencyId": "comp_solve_linear"
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "tryout", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "revisitPolicy": "allowed",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "altText": "Persamaan linear 3x + 5 = 20",
+        "keyboardAlternative": "Gunakan tombol panah atau angka untuk memilih opsi"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-10T10:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000002",
+      "version": 1,
+      "type": "multiple_select",
+      "metadata": {
+        "code": "MAT-SD-NUM-002",
+        "title": "Identifikasi Bilangan Prima",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_sd_5",
+        "subjectId": "subj_math",
+        "topicId": "top_number_prime",
+        "competencyIds": ["comp_prime_classify"],
+        "difficulty": "medium",
+        "bloomLevel": "analyze",
+        "locale": "id-ID",
+        "estimatedSeconds": 75,
+        "tags": ["bilangan-prima"]
+      },
+      "content": {
+        "stem": "Pilih semua pernyataan yang benar mengenai bilangan prima!",
+        "instruction": "Jawaban benar bisa lebih dari satu. Centang semua yang memenuhi definisi.",
+        "media": []
+      },
+      "interaction": {
+        "options": [
+          { "id": "opt_a", "label": "2 adalah satu-satunya bilangan prima genap" },
+          { "id": "opt_b", "label": "9 termasuk bilangan prima karena ganjil" },
+          { "id": "opt_c", "label": "Bilangan prima memiliki tepat dua faktor positif berbeda" },
+          { "id": "opt_d", "label": "1 adalah bilangan prima terkecil" }
+        ]
+      },
+      "answerSpec": {
+        "correctOptionIds": ["opt_a", "opt_c"]
+      },
+      "scoring": {
+        "method": "partial_credit",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": [
+          "Bilangan prima memiliki tepat dua faktor positif: 1 dan dirinya sendiri.",
+          "Angka 2 memiliki faktor 1 dan 2, sedangkan 9 memiliki faktor 1, 3, 9 dan 1 hanya memiliki satu faktor."
+        ],
+        "hints": [
+          "Hitung banyaknya faktor pembagi positif untuk setiap bilangan pada pilihan."
+        ],
+        "correctFeedback": "Hebat! Kamu membedakan syarat tepat dua faktor dengan sangat akurat.",
+        "incorrectFeedback": "Periksa kembali jumlah faktor angka 1 dan 9.",
+        "remediationCompetencyId": "comp_prime_classify"
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "tryout", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "keyboardAlternative": "Gunakan Tab dan Space untuk mencentang beberapa pilihan"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-11T09:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000003",
+      "version": 1,
+      "type": "true_false",
+      "metadata": {
+        "code": "FIS-SMA-KIN-003",
+        "title": "Konsep Percepatan pada GLB",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_sma_10",
+        "subjectId": "subj_phys",
+        "topicId": "top_kinematics",
+        "competencyIds": ["comp_glb_motion"],
+        "difficulty": "easy",
+        "bloomLevel": "understand",
+        "locale": "id-ID",
+        "estimatedSeconds": 45
+      },
+      "content": {
+        "stem": "Pada Gerak Lurus Beraturan (GLB), kecepatan benda bernilai konstan sehingga percepatannya sama dengan nol (\\(a = 0\\)).",
+        "instruction": "Tentukan apakah pernyataan tersebut Benar atau Salah.",
+        "media": []
+      },
+      "interaction": {
+        "trueLabel": "Benar",
+        "falseLabel": "Salah"
+      },
+      "answerSpec": {
+        "correctAnswer": true
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": [
+          "Percepatan rata-rata didefinisikan sebagai \\(a = \\frac{\\Delta v}{\\Delta t}\\).",
+          "Karena pada GLB kecepatan tetap (\\(\\Delta v = 0\\)), maka percepatan bernilai \\(0\\ \\text{m/s}^2\\)."
+        ],
+        "hints": ["Ingat definisi percepatan sebagai laju perubahan kecepatan terhadap waktu."],
+        "correctFeedback": "Benar! Kecepatan konstan berarti tidak ada perubahan kecepatan tiap detik.",
+        "incorrectFeedback": "Perhatikan perbedaan antara GLB (kecepatan tetap) dan GLBB (percepatan tetap).",
+        "remediationCompetencyId": "comp_glb_motion"
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "tryout", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-11T10:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000004",
+      "version": 1,
+      "type": "numeric",
+      "metadata": {
+        "code": "FIS-SMA-KIN-004",
+        "title": "Menghitung Kelajuan Rata-Rata",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_sma_10",
+        "subjectId": "subj_phys",
+        "topicId": "top_kinematics",
+        "competencyIds": ["comp_glb_motion"],
+        "difficulty": "medium",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 60
+      },
+      "content": {
+        "stem": "Sebuah mobil bergerak lurus menempuh jarak \\(s = 120\\ \\text{m}\\) dalam waktu \\(t = 10\\ \\text{s}\\). Berapa kelajuan rata-rata mobil tersebut?",
+        "instruction": "Masukkan nilai numerik saja (boleh memakai titik atau koma desimal). Satuan ditampilkan terpisah.",
+        "media": []
+      },
+      "interaction": {
+        "unit": "m/s",
+        "decimalRule": "Toleransi ±0.01",
+        "placeholder": "Contoh: 12"
+      },
+      "answerSpec": {
+        "expectedValue": 12,
+        "tolerance": 0.01,
+        "unit": "m/s",
+        "unitRequired": false
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": [
+          "Gunakan rumus kelajuan rata-rata: \\(v = \\frac{s}{t}\\)",
+          "\\(v = \\frac{120\\ \\text{m}}{10\\ \\text{s}} = 12\\ \\text{m/s}\\)"
+        ],
+        "hints": ["Kelajuan adalah hasil bagi jarak tempuh total dengan waktu tempuh total."],
+        "correctFeedback": "Tepat! 120 meter dibagi 10 sekon menghasilkan 12 m/s.",
+        "incorrectFeedback": "Periksa kembali pembagian jarak (120 m) oleh waktu (10 s).",
+        "remediationCompetencyId": "comp_glb_motion"
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "tryout", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "keyboardAlternative": "Input angka standar dengan label satuan m/s"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-11T10:30:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000005",
+      "version": 1,
+      "type": "short_text",
+      "metadata": {
+        "code": "MAT-SMP-GEO-005",
+        "title": "Istilah Suku Tetap Aljabar",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_solve_linear"],
+        "difficulty": "very_easy",
+        "bloomLevel": "remember",
+        "locale": "id-ID",
+        "estimatedSeconds": 40
+      },
+      "content": {
+        "stem": "Pada bentuk aljabar \\(5x + 7\\), bilangan 7 yang tidak memuat variabel disebut apa?",
+        "instruction": "Tulis satu istilah matematika yang tepat.",
+        "media": []
+      },
+      "interaction": {
+        "placeholder": "Tulis jawaban singkat..."
+      },
+      "answerSpec": {
+        "acceptedAnswers": ["konstanta", "constant"],
+        "caseSensitive": false
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": ["Bilangan tetap yang tidak disertai variabel disebut konstanta."],
+        "hints": ["Istilahnya berasal dari kata konstan (tetap)."],
+        "correctFeedback": "Benar! Angka 7 pada 5x + 7 adalah konstanta.",
+        "incorrectFeedback": "Istilah yang dicari adalah konstanta (berbeda dengan koefisien 5 di depan x)."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T08:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000006",
+      "version": 1,
+      "type": "fill_blank",
+      "metadata": {
+        "code": "MAT-SMP-ALG-006",
+        "title": "Substitusi Dua Slot Aljabar",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_simplify_expr"],
+        "difficulty": "easy",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 55
+      },
+      "content": {
+        "stem": "Lengkapi hasil substitusi untuk \\(x = 4\\) pada ekspresi berikut.",
+        "instruction": "Isi kedua kotak kosong dengan bilangan bulat yang tepat.",
+        "media": []
+      },
+      "interaction": {
+        "templateText": "Jika x = 4, maka 2x = [blank_1], sehingga 2x + 3 = [blank_2].",
+        "blanks": [
+          { "id": "blank_1", "label": "Nilai 2x" },
+          { "id": "blank_2", "label": "Nilai 2x + 3" }
+        ]
+      },
+      "answerSpec": {
+        "blanks": {
+          "blank_1": ["8"],
+          "blank_2": ["11"]
+        }
+      },
+      "scoring": {
+        "method": "partial_credit",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": ["Kalikan 2 dengan 4: \\(2(4) = 8\\)", "Tambahkan 3: \\(8 + 3 = 11\\)"],
+        "hints": ["Hitung perkalian 2x terlebih dahulu sebelum menambahkan 3."],
+        "correctFeedback": "Sempurna! Substitusi dan urutan operasimu benar.",
+        "incorrectFeedback": "Hitung 2 × 4 terlebih dahulu, baru tambahkan 3."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T09:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000007",
+      "version": 1,
+      "type": "matching",
+      "metadata": {
+        "code": "FIS-SMA-BES-007",
+        "title": "Pasangkan Besaran dan Satuan SI",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_sma_10",
+        "subjectId": "subj_phys",
+        "topicId": "top_units_si",
+        "competencyIds": ["comp_si_units"],
+        "difficulty": "medium",
+        "bloomLevel": "understand",
+        "locale": "id-ID",
+        "estimatedSeconds": 70
+      },
+      "content": {
+        "stem": "Pasangkan setiap besaran fisika di sebelah kiri dengan satuan SI yang tepat.",
+        "instruction": "Pilih pasangan yang sesuai untuk tiap besaran (satu satuan hanya dipakai sekali).",
+        "media": []
+      },
+      "interaction": {
+        "leftItems": [
+          { "id": "l_force", "label": "Gaya (F)" },
+          { "id": "l_energy", "label": "Energi / Usaha (W)" },
+          { "id": "l_power", "label": "Daya (P)" }
+        ],
+        "rightItems": [
+          { "id": "r_newton", "label": "Newton (N)" },
+          { "id": "r_joule", "label": "Joule (J)" },
+          { "id": "r_watt", "label": "Watt (W)" },
+          { "id": "r_pascal", "label": "Pascal (Pa)" }
+        ]
+      },
+      "answerSpec": {
+        "correctPairs": {
+          "l_force": "r_newton",
+          "l_energy": "r_joule",
+          "l_power": "r_watt"
+        }
+      },
+      "scoring": {
+        "method": "partial_credit",
+        "maxPoints": 15
+      },
+      "explanation": {
+        "steps": [
+          "Gaya diukur dalam Newton (N = kg·m/s²).",
+          "Energi/Usaha diukur dalam Joule (J = N·m).",
+          "Daya adalah laju energi per sekon, diukur dalam Watt (W = J/s)."
+        ],
+        "hints": ["Pascal (Pa) adalah satuan tekanan, bukan gaya atau daya."],
+        "correctFeedback": "Tepat! Seluruh besaran dipasangkan dengan satuan SI yang benar.",
+        "incorrectFeedback": "Perhatikan kembali satuan energi (Joule) dan daya (Watt)."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "keyboardAlternative": "Gunakan dropdown select aksesibel keyboard untuk setiap baris"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T10:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000008",
+      "version": 1,
+      "type": "ordering",
+      "metadata": {
+        "code": "MAT-SMP-ALG-008",
+        "title": "Urutan Penyelesaian 2x + 4 = 14",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_solve_linear"],
+        "difficulty": "medium",
+        "bloomLevel": "analyze",
+        "locale": "id-ID",
+        "estimatedSeconds": 80
+      },
+      "content": {
+        "stem": "Susun langkah penyelesaian persamaan \\(2x + 4 = 14\\) dari tahap awal hingga akhir.",
+        "instruction": "Gunakan tombol Naik / Turun agar urutan langkah menjadi logis.",
+        "media": []
+      },
+      "interaction": {
+        "items": [
+          { "id": "step_div", "label": "Bagi kedua ruas dengan 2" },
+          { "id": "step_sub", "label": "Kurangi kedua ruas dengan 4" },
+          { "id": "step_res", "label": "Diperoleh hasil akhir x = 5" },
+          { "id": "step_mid", "label": "Diperoleh bentuk sederhana 2x = 10" }
+        ]
+      },
+      "answerSpec": {
+        "correctOrder": ["step_sub", "step_mid", "step_div", "step_res"]
+      },
+      "scoring": {
+        "method": "partial_credit",
+        "maxPoints": 12
+      },
+      "explanation": {
+        "steps": [
+          "1. Kurangi kedua ruas dengan 4",
+          "2. Diperoleh 2x = 10",
+          "3. Bagi kedua ruas dengan 2",
+          "4. Diperoleh x = 5"
+        ],
+        "hints": ["Mulai dengan menghilangkan konstanta +4 terlebih dahulu."],
+        "correctFeedback": "Urutan penyelesaianmu sangat sistematis!",
+        "incorrectFeedback": "Pastikan 2x = 10 muncul tepat setelah mengurangi kedua ruas dengan 4."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "keyboardAlternative": "Tombol Naik dan Turun mendukung fokus keyboard penuh"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T11:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000009",
+      "version": 1,
+      "type": "drag_drop",
+      "metadata": {
+        "code": "MAT-SMP-ALG-009",
+        "title": "Klasifikasi Komponen Bentuk Aljabar",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_simplify_expr"],
+        "difficulty": "easy",
+        "bloomLevel": "understand",
+        "locale": "id-ID",
+        "estimatedSeconds": 75
+      },
+      "content": {
+        "stem": "Tempatkan setiap bagian dari ekspresi \\(4y - 9\\) ke kategori yang benar.",
+        "instruction": "Seret item atau pilih item lalu klik zona target (ramah keyboard & layar sentuh).",
+        "media": []
+      },
+      "interaction": {
+        "draggableItems": [
+          { "id": "itm_4", "label": "4" },
+          { "id": "itm_y", "label": "y" },
+          { "id": "itm_neg9", "label": "-9" }
+        ],
+        "dropZones": [
+          { "id": "zn_coeff", "label": "Koefisien" },
+          { "id": "zn_var", "label": "Variabel" },
+          { "id": "zn_const", "label": "Konstanta" }
+        ]
+      },
+      "answerSpec": {
+        "correctPlacements": {
+          "itm_4": "zn_coeff",
+          "itm_y": "zn_var",
+          "itm_neg9": "zn_const"
+        }
+      },
+      "scoring": {
+        "method": "partial_credit",
+        "maxPoints": 12
+      },
+      "explanation": {
+        "steps": [
+          "4 adalah koefisien yang mengalikan variabel y.",
+          "y adalah variabel.",
+          "-9 adalah konstanta karena nilainya tetap tanpa variabel."
+        ],
+        "hints": ["Tanda negatif di depan 9 ikut menjadi bagian konstanta."],
+        "correctFeedback": "Tepat! Semua komponen 4y − 9 terklasifikasi sempurna.",
+        "incorrectFeedback": "Cek kembali perbedaan antara koefisien (pengali variabel) dan konstanta."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "keyboardAlternative": "Gunakan pemilih target atau klik kartu item lalu pilih zona"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T12:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000010",
+      "version": 1,
+      "type": "graph_plot",
+      "metadata": {
+        "code": "MAT-SMP-GEO-010",
+        "title": "Plot Koordinat Kartesius Titik A(2, 3)",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_geometry_tri",
+        "competencyIds": ["comp_cartesian_plot"],
+        "difficulty": "medium",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 60
+      },
+      "content": {
+        "stem": "Plot titik \\(A(2, 3)\\) pada bidang koordinat Kartesius di bawah ini.",
+        "instruction": "Klik titik pada bidang grafik atau masukkan koordinat (x, y) melalui kontrol keyboard.",
+        "media": []
+      },
+      "interaction": {
+        "bounds": { "minX": -5, "maxX": 5, "minY": -5, "maxY": 5, "step": 1 }
+      },
+      "answerSpec": {
+        "targetPoints": [{ "x": 2, "y": 3 }],
+        "tolerance": 0.4
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": [
+          "Koordinat ditulis dalam urutan (x, y).",
+          "Bergerak 2 satuan ke kanan pada sumbu x, lalu 3 satuan ke atas sejajar sumbu y."
+        ],
+        "hints": ["Nilai pertama adalah absis (x = 2), nilai kedua adalah ordinat (y = 3)."],
+        "correctFeedback": "Tepat! Titik A berada di kuadran I pada koordinat (2, 3).",
+        "incorrectFeedback": "Pastikan x = 2 ke kanan dan y = 3 ke atas (jangan tertukar menjadi (3, 2))."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "altText": "Bidang koordinat Kartesius dari -5 sampai 5 pada sumbu x dan y",
+        "keyboardAlternative": "Gunakan input angka koordinat x dan y atau tombol panah grid"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T13:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000011",
+      "version": 1,
+      "type": "formula_input",
+      "metadata": {
+        "code": "MAT-SMP-ALG-011",
+        "title": "Penyederhanaan Ekspresi Distributif",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_simplify_expr"],
+        "difficulty": "hard",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 90
+      },
+      "content": {
+        "stem": "Sederhanakan bentuk aljabar berikut: \\(2(x + 3) - x\\)",
+        "instruction": "Ketik ekspresi aljabar paling sederhana menggunakan keypad matematika atau keyboard.",
+        "media": []
+      },
+      "interaction": {
+        "expressionDisplay": "2(x + 3) - x",
+        "variables": ["x"],
+        "placeholder": "Contoh: x+6"
+      },
+      "answerSpec": {
+        "acceptedExpressions": ["x+6", "6+x"]
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 15
+      },
+      "explanation": {
+        "steps": [
+          "Kalikan 2 ke dalam tanda kurung: \\(2(x + 3) = 2x + 6\\)",
+          "Gabungkan suku sejenis: \\(2x + 6 - x = x + 6\\)"
+        ],
+        "hints": ["Ingat sifat distributif: a(b + c) = ab + ac sebelum menggabungkan suku x."],
+        "correctFeedback": "Hebat! Ekspresimu ekuivalen secara aljabar dengan x + 6.",
+        "incorrectFeedback": "Periksa hasil perkalian 2 × 3 dan pengurangan 2x − x."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "tryout", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "keyboardAlternative": "Mendukung pengetikan ekspresi langsung atau tombol simbol matematika"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T14:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000012",
+      "version": 1,
+      "type": "diagram_label",
+      "metadata": {
+        "code": "MAT-SMP-GEO-012",
+        "title": "Label Bagian Segitiga Siku-Siku",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_geometry_tri",
+        "competencyIds": ["comp_triangle_angles"],
+        "difficulty": "medium",
+        "bloomLevel": "understand",
+        "locale": "id-ID",
+        "estimatedSeconds": 70
+      },
+      "content": {
+        "stem": "Pasangkan setiap titik penanda (R1, R2, R3) pada diagram segitiga siku-siku berikut dengan label yang tepat.",
+        "instruction": "Klik hotspot pada diagram atau gunakan daftar pilihan label per titik.",
+        "media": []
+      },
+      "interaction": {
+        "diagramSvgKind": "right_triangle",
+        "regions": [
+          { "id": "reg_hyp", "code": "R1", "x": 195, "y": 82 },
+          { "id": "reg_base", "code": "R2", "x": 170, "y": 158 },
+          { "id": "reg_right", "code": "R3", "x": 85, "y": 135 }
+        ],
+        "labelBank": [
+          { "id": "lbl_hyp", "label": "Hipotenusa (Sisi Miring)" },
+          { "id": "lbl_base", "label": "Sisi Alas" },
+          { "id": "lbl_right", "label": "Sudut Siku-Siku 90°" }
+        ]
+      },
+      "answerSpec": {
+        "correctLabels": {
+          "reg_hyp": "lbl_hyp",
+          "reg_base": "lbl_base",
+          "reg_right": "lbl_right"
+        }
+      },
+      "scoring": {
+        "method": "partial_credit",
+        "maxPoints": 15
+      },
+      "explanation": {
+        "steps": [
+          "R1 berada di seberang sudut 90°, sehingga merupakan hipotenusa (sisi miring terpanjang).",
+          "R2 berada di sisi mendatar bawah (alas), sedangkan R3 menandai sudut siku-siku 90°."
+        ],
+        "hints": ["Sisi terpanjang tepat di hadapan sudut 90° disebut hipotenusa."],
+        "correctFeedback": "Tepat! Kamu mengenali struktur segitiga siku-siku dengan baik.",
+        "incorrectFeedback": "Ingat bahwa hipotenusa selalu berada di depan sudut siku-siku."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "altText": "Diagram segitiga siku-siku dengan tiga penanda R1 di sisi miring, R2 di alas, dan R3 di sudut 90 derajat",
+        "keyboardAlternative": "Gunakan pemilih label untuk R1, R2, dan R3"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T15:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000013",
+      "version": 1,
+      "type": "simulation",
+      "metadata": {
+        "code": "FIS-SMA-DIN-013",
+        "title": "Eksperimen Hukum II Newton (a = F/m)",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_sma_10",
+        "subjectId": "subj_phys",
+        "topicId": "top_dynamics",
+        "competencyIds": ["comp_newton_2"],
+        "difficulty": "hard",
+        "bloomLevel": "analyze",
+        "locale": "id-ID",
+        "estimatedSeconds": 120
+      },
+      "content": {
+        "stem": "Atur massa balok menjadi \\(m = 4\\ \\text{kg}\\) dan gaya dorong menjadi \\(F = 20\\ \\text{N}\\) pada simulasi, lalu jalankan simulasi dan masukkan nilai percepatan benda.",
+        "instruction": "Gunakan slider atau input angka parameter, klik Jalankan (Play), amati gerak balok, dan tuliskan percepatannya.",
+        "media": []
+      },
+      "interaction": {
+        "simulationModel": "newton_second_law",
+        "formulaLatex": "a = \\frac{F}{m}",
+        "parameters": [
+          { "id": "mass", "label": "Massa (m)", "unit": "kg", "min": 1, "max": 10, "step": 1, "defaultValue": 2 },
+          { "id": "force", "label": "Gaya (F)", "unit": "N", "min": 2, "max": 50, "step": 2, "defaultValue": 10 }
+        ],
+        "unit": "m/s²"
+      },
+      "answerSpec": {
+        "expectedValue": 5,
+        "tolerance": 0.1,
+        "targetParameters": { "mass": 4, "force": 20 }
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 20
+      },
+      "explanation": {
+        "steps": [
+          "Berdasarkan Hukum II Newton: \\(a = \\frac{F}{m}\\)",
+          "Substitusi \\(F = 20\\ \\text{N}\\) dan \\(m = 4\\ \\text{kg}\\): \\(a = \\frac{20}{4} = 5\\ \\text{m/s}^2\\)"
+        ],
+        "hints": ["Atur massa ke 4 kg dan gaya ke 20 N, lalu perhatikan percepatan terukur."],
+        "correctFeedback": "Luar biasa! Hasil observasi eksperimenmu sesuai dengan Hukum II Newton.",
+        "incorrectFeedback": "Pastikan nilai massa = 4 kg dan gaya = 20 N sebelum mencatat percepatan."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {
+        "altText": "Simulasi gerak balok horizontal dengan kontrol massa dan gaya",
+        "keyboardAlternative": "Slider dilengkapi input angka langsung untuk massa dan gaya serta tombol Play, Pause, Reset"
+      },
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T16:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000014",
+      "version": 1,
+      "type": "worked_solution",
+      "metadata": {
+        "code": "MAT-SMP-ALG-014",
+        "title": "Uraian Penyelesaian 4x − 7 = 21",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_solve_linear"],
+        "difficulty": "hard",
+        "bloomLevel": "evaluate",
+        "locale": "id-ID",
+        "estimatedSeconds": 180
+      },
+      "content": {
+        "stem": "Jelaskan langkah demi langkah penyelesaian persamaan \\(4x - 7 = 21\\) beserta alasan operasi pada kedua ruas!",
+        "instruction": "Tuliskan alasan tiap langkah pengerjaan, bukan hanya hasil akhirnya.",
+        "media": []
+      },
+      "interaction": {
+        "responseMode": "rich_text",
+        "minWords": 6,
+        "placeholder": "Langkah 1: Tambahkan 7 pada kedua ruas..."
+      },
+      "answerSpec": {
+        "requiredKeywords": ["7", "28", "4", "7"],
+        "sampleAnswer": "Tambahkan 7 pada kedua ruas sehingga 4x = 28. Bagi kedua ruas dengan 4 sehingga diperoleh x = 7."
+      },
+      "scoring": {
+        "method": "weighted_rubric",
+        "maxPoints": 15,
+        "rubric": [
+          { "id": "rub_1", "criterion": "Mengidentifikasi operasi invers (+7 pada kedua ruas)", "maxPoints": 5 },
+          { "id": "rub_2", "criterion": "Menyederhanakan menjadi 4x = 28 dengan tepat", "maxPoints": 5 },
+          { "id": "rub_3", "criterion": "Membagi kedua ruas dengan 4 dan menyimpulkan x = 7", "maxPoints": 5 }
+        ]
+      },
+      "explanation": {
+        "steps": [
+          "Tambahkan 7 ke kedua ruas: \\(4x - 7 + 7 = 21 + 7 \\Rightarrow 4x = 28\\)",
+          "Bagi kedua ruas dengan 4: \\(x = \\frac{28}{4} = 7\\)"
+        ],
+        "hints": ["Sebutkan operasi yang menjaga kesetaraan kedua ruas di setiap langkah."],
+        "correctFeedback": "Penalaran langkah penyelesaianmu sangat jelas dan lengkap.",
+        "incorrectFeedback": "Pastikan kamu menjelaskan alasan penambahan 7 dan pembagian dengan 4."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "tryout", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "after_submission",
+        "visibility": "global"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-12T17:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000015",
+      "version": 1,
+      "type": "single_choice",
+      "metadata": {
+        "code": "MAT-SMA-QUAD-015",
+        "title": "Titik Puncak Fungsi Kuadrat",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_sma_10",
+        "subjectId": "subj_math",
+        "topicId": "top_quadratic",
+        "competencyIds": ["comp_quadratic_graph"],
+        "difficulty": "medium",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 90
+      },
+      "content": {
+        "stem": "Tentukan koordinat titik puncak parabola \\(f(x) = x^2 - 6x + 5\\).",
+        "instruction": "Pilih koordinat (x_p, y_p) yang tepat.",
+        "media": []
+      },
+      "interaction": {
+        "options": [
+          { "id": "opt_a", "label": "(3, -4)" },
+          { "id": "opt_b", "label": "(-3, 4)" },
+          { "id": "opt_c", "label": "(3, 4)" },
+          { "id": "opt_d", "label": "(6, 5)" }
+        ]
+      },
+      "answerSpec": {
+        "correctOptionIds": ["opt_a"]
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": [
+          "Sumbu simetri \\(x_p = -\\frac{b}{2a} = -\\frac{-6}{2(1)} = 3\\)",
+          "Nilai ekstrem \\(y_p = f(3) = 3^2 - 6(3) + 5 = 9 - 18 + 5 = -4\\)"
+        ],
+        "hints": ["Gunakan rumus sumbu simetri x_p = -b / (2a)."],
+        "correctFeedback": "Tepat! Titik puncak berada di (3, -4).",
+        "incorrectFeedback": "Hati-hati dengan tanda negatif pada b = -6."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "tryout", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "institution"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-13T08:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000016",
+      "version": 2,
+      "type": "single_choice",
+      "metadata": {
+        "code": "MAT-SMA-QUAD-015",
+        "title": "Titik Puncak Fungsi Kuadrat (Revisi Kontekstual)",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_sma_10",
+        "subjectId": "subj_math",
+        "topicId": "top_quadratic",
+        "competencyIds": ["comp_quadratic_graph"],
+        "difficulty": "medium",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 95
+      },
+      "content": {
+        "stem": "Lintasan bola mengikuti fungsi tinggi \\(h(t) = -t^2 + 6t + 5\\). Pada detik keberapa bola mencapai tinggi maksimum?",
+        "instruction": "Pilih waktu t dalam satuan sekon.",
+        "media": []
+      },
+      "interaction": {
+        "options": [
+          { "id": "opt_a", "label": "2 detik" },
+          { "id": "opt_b", "label": "3 detik" },
+          { "id": "opt_c", "label": "5 detik" },
+          { "id": "opt_d", "label": "6 detik" }
+        ]
+      },
+      "answerSpec": {
+        "correctOptionIds": ["opt_b"]
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": ["\\(t_p = -\\frac{b}{2a} = -\\frac{6}{2(-1)} = 3\\) detik."],
+        "hints": ["Cari sumbu simetri parabola untuk nilai maksimum."],
+        "correctFeedback": "Benar, puncak dicapai pada t = 3 detik.",
+        "incorrectFeedback": "Gunakan rumus t_p = -b/(2a)."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "tryout", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "institution"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "in_review",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "previousPublishedVersion": 1
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000017",
+      "version": 1,
+      "type": "numeric",
+      "metadata": {
+        "code": "MAT-UNIV-CAL-017",
+        "title": "Turunan Fungsi Polinomial pada Titik",
+        "curriculumId": "cur_ib",
+        "curriculumVersionId": "ver_ib_2026",
+        "gradeLevelId": "grade_univ_1",
+        "subjectId": "subj_math",
+        "topicId": "top_calculus_deriv",
+        "competencyIds": ["comp_calc_derivative"],
+        "difficulty": "medium",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 75
+      },
+      "content": {
+        "stem": "Diketahui \\(f(x) = 3x^2 - 4x + 7\\). Hitung nilai turunan pertama \\(f'(2)\\).",
+        "instruction": "Masukkan hasil bilangan bulatnya.",
+        "media": []
+      },
+      "interaction": {
+        "unit": "",
+        "decimalRule": "Bilangan bulat"
+      },
+      "answerSpec": {
+        "expectedValue": 8,
+        "tolerance": 0.01
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": ["\\(f'(x) = 6x - 4\\)", "\\(f'(2) = 6(2) - 4 = 8\\)"],
+        "hints": ["Turunkan setiap suku terlebih dahulu lalu substitusikan x = 2."],
+        "correctFeedback": "Tepat! f'(2) = 8.",
+        "incorrectFeedback": "Periksa turunan 3x^2 yaitu 6x."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "approved",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000018",
+      "version": 1,
+      "type": "single_choice",
+      "metadata": {
+        "code": "MAT-SMP-GEO-018",
+        "title": "Sudut Ketiga Segitiga",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_geometry_tri",
+        "competencyIds": ["comp_triangle_angles"],
+        "difficulty": "easy",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 50
+      },
+      "content": {
+        "stem": "Sebuah segitiga memiliki dua sudut masing-masing \\(50^\\circ\\) dan \\(60^\\circ\\). Berapakah besar sudut ketiganya?",
+        "instruction": "Pilih besar sudut dalam derajat.",
+        "media": []
+      },
+      "interaction": {
+        "options": [
+          { "id": "opt_a", "label": "60°" },
+          { "id": "opt_b", "label": "70°" },
+          { "id": "opt_c", "label": "80°" },
+          { "id": "opt_d", "label": "90°" }
+        ]
+      },
+      "answerSpec": {
+        "correctOptionIds": ["opt_b"]
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": ["Jumlah sudut dalam segitiga adalah \\(180^\\circ\\).", "\\(180^\\circ - 50^\\circ - 60^\\circ = 70^\\circ\\)."],
+        "hints": ["Total ketiga sudut segitiga selalu 180°."],
+        "correctFeedback": "Benar! Sudut ketiga bernilai 70°.",
+        "incorrectFeedback": "Kurangi 180° dengan jumlah 50° + 60°."
+      },
+      "delivery": {
+        "allowedModes": ["practice", "challenge", "formal_exam"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "global"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "published",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a",
+        "reviewedBy": "usr_reviewer_a",
+        "publishedBy": "usr_publisher_a",
+        "publishedAt": "2026-11-13T10:00:00Z"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000019",
+      "version": 1,
+      "type": "single_choice",
+      "metadata": {
+        "code": "MAT-PINTAR-019",
+        "title": "Draf Soal Tenant Bimbel Pintar (Isolasi Tenant)",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_solve_linear"],
+        "difficulty": "medium",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 60
+      },
+      "content": {
+        "stem": "Draf privat milik Bimbel Pintar Bersama: jika \\(5x - 10 = 20\\), berapakah \\(x\\)?",
+        "instruction": "Pilih nilai x.",
+        "media": []
+      },
+      "interaction": {
+        "options": [
+          { "id": "opt_a", "label": "4" },
+          { "id": "opt_b", "label": "6" }
+        ]
+      },
+      "answerSpec": {
+        "correctOptionIds": ["opt_b"]
+      },
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": ["5x = 30, sehingga x = 6."],
+        "hints": ["Tambahkan 10 ke kedua ruas."],
+        "correctFeedback": "Tepat!",
+        "incorrectFeedback": "Cek kembali penjumlahan 20 + 10."
+      },
+      "delivery": {
+        "allowedModes": ["practice"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "private"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "draft",
+        "tenantId": "tenant_pintar",
+        "createdBy": "usr_teacher_b"
+      }
+    },
+    {
+      "schemaVersion": "edumotion-question-v1",
+      "id": "11111111-1111-4111-8111-000000000020",
+      "version": 1,
+      "type": "numeric",
+      "metadata": {
+        "code": "MAT-SMP-ERR-020",
+        "title": "Draf Belum Valid (Demo Validation Failed)",
+        "curriculumId": "cur_merdeka",
+        "curriculumVersionId": "ver_merdeka_2026",
+        "gradeLevelId": "grade_smp_8",
+        "subjectId": "subj_math",
+        "topicId": "top_algebra_linear",
+        "competencyIds": ["comp_solve_linear"],
+        "difficulty": "easy",
+        "bloomLevel": "apply",
+        "locale": "id-ID",
+        "estimatedSeconds": 45
+      },
+      "content": {
+        "stem": "Contoh draf soal dengan validasi gagal (kunci angka tidak valid).",
+        "instruction": "Perbaiki kunci jawaban sebelum diajukan ke review.",
+        "media": []
+      },
+      "interaction": {
+        "unit": "cm"
+      },
+      "answerSpec": {},
+      "scoring": {
+        "method": "exact_match",
+        "maxPoints": 10
+      },
+      "explanation": {
+        "steps": [],
+        "hints": []
+      },
+      "delivery": {
+        "allowedModes": ["practice"],
+        "hintPolicy": "progressive",
+        "feedbackPolicy": "immediate",
+        "visibility": "institution"
+      },
+      "accessibility": {},
+      "governance": {
+        "status": "validation_failed",
+        "tenantId": "tenant_cendekia",
+        "createdBy": "usr_author_a"
+      }
+    }
+  ]
+}

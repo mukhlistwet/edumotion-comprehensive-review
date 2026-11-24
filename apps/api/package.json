@@ -1,0 +1,21 @@
+{
+  "name": "@edumotion/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/loopback-app.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "migrate": "node ./src/db/migrate.js",
+    "seed": "node ./src/db/seed.js"
+  },
+  "dependencies": {
+    "@edumotion/domain": "*",
+    "@electric-sql/pglite": "^0.6.0",
+    "@loopback/core": "^7.0.0",
+    "@loopback/rest": "^16.0.1",
+    "express": "^4.22.3",
+    "pg": "^8.23.1",
+    "yaml": "^2.9.1"
+  }
+}

@@ -1,0 +1,104 @@
+[
+  {
+    "id": "adventure",
+    "name": "Adventure Journey",
+    "base": true,
+    "recommendedLevels": [
+      "SD",
+      "SMP"
+    ],
+    "subjects": [
+      "mathematics",
+      "physics"
+    ],
+    "renderer": "AdventureRenderer"
+  },
+  {
+    "id": "board",
+    "name": "Board Game",
+    "base": true,
+    "recommendedLevels": [
+      "SD",
+      "SMP"
+    ],
+    "subjects": [
+      "mathematics",
+      "physics"
+    ],
+    "renderer": "BoardGameRenderer"
+  },
+  {
+    "id": "explore",
+    "name": "World Exploration",
+    "base": false,
+    "unlock": [
+      "achievement",
+      "premium"
+    ],
+    "recommendedLevels": [
+      "SD",
+      "SMP",
+      "SMA",
+      "UNIVERSITY"
+    ],
+    "subjects": [
+      "mathematics",
+      "physics"
+    ],
+    "renderer": "WorldExplorationRenderer"
+  },
+  {
+    "id": "skill",
+    "name": "Skill Tree",
+    "base": true,
+    "recommendedLevels": [
+      "SMP",
+      "SMA",
+      "UNIVERSITY"
+    ],
+    "subjects": [
+      "mathematics",
+      "physics"
+    ],
+    "renderer": "SkillTreeRenderer"
+  },
+  {
+    "id": "racing",
+    "name": "Racing Track",
+    "base": false,
+    "unlock": [
+      "achievement",
+      "premium"
+    ],
+    "recommendedLevels": [
+      "SD",
+      "SMP",
+      "SMA",
+      "UNIVERSITY"
+    ],
+    "subjects": [
+      "mathematics",
+      "physics"
+    ],
+    "renderer": "RacingTrackRenderer"
+  },
+  {
+    "id": "galaxy",
+    "name": "Galaxy Mission",
+    "base": false,
+    "unlock": [
+      "achievement",
+      "premium"
+    ],
+    "recommendedLevels": [
+      "SMP",
+      "SMA",
+      "UNIVERSITY"
+    ],
+    "subjects": [
+      "physics",
+      "mathematics"
+    ],
+    "renderer": "GalaxyMissionRenderer"
+  }
+]

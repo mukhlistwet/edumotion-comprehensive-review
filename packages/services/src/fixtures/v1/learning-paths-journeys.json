@@ -1,0 +1,357 @@
+{
+  "fixtureVersion": "1.0.0",
+  "learningPaths": [
+    {
+      "id": "path_math_smp_algebra",
+      "journeyId": "jrn_math_smp_algebra",
+      "subjectId": "subj_math",
+      "subjectCode": "mathematics",
+      "curriculumId": "cur_merdeka",
+      "curriculumVersionId": "ver_merdeka_2026",
+      "gradeLevelId": "grade_smp_8",
+      "educationLevel": "SMP",
+      "title": "Matematika SMP · Aljabar & Persamaan Linear",
+      "description": "Pahami variabel, bentuk aljabar, persamaan linear satu variabel, hingga grafik Kartesius.",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "path_math_sma_quadratic",
+      "journeyId": "jrn_math_sma_quadratic",
+      "subjectId": "subj_math",
+      "subjectCode": "mathematics",
+      "curriculumId": "cur_merdeka",
+      "curriculumVersionId": "ver_merdeka_2026",
+      "gradeLevelId": "grade_sma_10",
+      "educationLevel": "SMA",
+      "title": "Matematika SMA · Fungsi & Persamaan Kuadrat",
+      "description": "Eksplorasi parabola, titik puncak, diskriminan, dan pemodelan masalah kuadrat.",
+      "version": 1,
+      "status": "published"
+    },
+    {
+      "id": "path_phys_sma_mechanics",
+      "journeyId": "jrn_phys_sma_mechanics",
+      "subjectId": "subj_phys",
+      "subjectCode": "physics",
+      "curriculumId": "cur_merdeka",
+      "curriculumVersionId": "ver_merdeka_2026",
+      "gradeLevelId": "grade_sma_10",
+      "educationLevel": "SMA",
+      "title": "Fisika SMA · Mekanika & Hukum Newton",
+      "description": "Analisis gerak lurus, gaya, Hukum II Newton melalui simulasi eksperimen 2D.",
+      "version": 1,
+      "status": "published"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "ch_alg_01",
+      "journeyId": "jrn_math_smp_algebra",
+      "pathId": "path_math_smp_algebra",
+      "sequence": 1,
+      "title": "Chapter 01 · Petualangan Persamaan Linear",
+      "subjectCode": "mathematics",
+      "educationLevel": "SMP",
+      "dominantActivityKind": "practice",
+      "status": "in_progress",
+      "startedAt": "2026-11-18T08:00:00Z",
+      "nodes": [
+        {
+          "id": "node_alg_01_1",
+          "sequence": 1,
+          "kind": "lesson",
+          "title": "Kamp Awal Variabel",
+          "description": "Kenali variabel, koefisien, dan konstanta pada persamaan.",
+          "prerequisiteNodeIds": [],
+          "activityIds": ["act_alg_intro"],
+          "rewardPreview": { "xp": 30 },
+          "levelMilestoneBadge": 0
+        },
+        {
+          "id": "node_alg_01_2",
+          "sequence": 2,
+          "kind": "practice",
+          "title": "Hutan Operasi Invers",
+          "description": "Gunakan penjumlahan dan pengurangan pada kedua ruas persamaan.",
+          "prerequisiteNodeIds": ["node_alg_01_1"],
+          "activityIds": ["act_alg_linear_basic"],
+          "rewardPreview": { "xp": 45 },
+          "levelMilestoneBadge": 1
+        },
+        {
+          "id": "node_alg_01_3",
+          "sequence": 3,
+          "kind": "practice",
+          "title": "Jembatan Dua Langkah",
+          "description": "Selesaikan persamaan bentuk ax + b = c dan sifat distributif.",
+          "prerequisiteNodeIds": ["node_alg_01_2"],
+          "activityIds": ["act_alg_two_step"],
+          "rewardPreview": { "xp": 50 },
+          "levelMilestoneBadge": 2
+        },
+        {
+          "id": "node_alg_01_4",
+          "sequence": 4,
+          "kind": "challenge",
+          "title": "Desa Keseimbangan",
+          "description": "Susun langkah penyelesaian dan pasangkan sifat operasi aljabar.",
+          "prerequisiteNodeIds": ["node_alg_01_3"],
+          "activityIds": ["act_alg_ordering"],
+          "rewardPreview": { "xp": 65 },
+          "levelMilestoneBadge": 3
+        },
+        {
+          "id": "node_alg_01_5",
+          "sequence": 5,
+          "kind": "lesson",
+          "title": "Sungai Koordinat",
+          "description": "Hubungkan nilai variabel dengan titik pada bidang Kartesius.",
+          "prerequisiteNodeIds": ["node_alg_01_4"],
+          "activityIds": ["act_alg_graph"],
+          "rewardPreview": { "xp": 55 },
+          "levelMilestoneBadge": 4
+        },
+        {
+          "id": "node_alg_01_6",
+          "sequence": 6,
+          "kind": "practice",
+          "title": "Puncak Formula",
+          "description": "Sederhanakan ekspresi matematika dengan input rumus simbolik.",
+          "prerequisiteNodeIds": ["node_alg_01_5"],
+          "activityIds": ["act_alg_formula"],
+          "rewardPreview": { "xp": 60 },
+          "levelMilestoneBadge": 5
+        },
+        {
+          "id": "node_alg_01_7",
+          "sequence": 7,
+          "kind": "milestone",
+          "title": "Observatorium Geometri",
+          "description": "Gabungkan analisis sudut segitiga dengan persamaan aljabar.",
+          "prerequisiteNodeIds": ["node_alg_01_6"],
+          "activityIds": ["act_geo_angles"],
+          "rewardPreview": { "xp": 75 },
+          "levelMilestoneBadge": 6
+        },
+        {
+          "id": "node_alg_01_8",
+          "sequence": 8,
+          "kind": "boss",
+          "title": "Tantangan Puncak Aljabar",
+          "description": "Boss challenge: buktikan penguasaan seluruh kompetensi Chapter 01.",
+          "prerequisiteNodeIds": ["node_alg_01_7"],
+          "activityIds": ["act_alg_boss"],
+          "rewardPreview": { "xp": 120, "achievementId": "ach_chapter_explorer" },
+          "levelMilestoneBadge": 7
+        }
+      ]
+    },
+    {
+      "id": "ch_alg_02",
+      "journeyId": "jrn_math_smp_algebra",
+      "pathId": "path_math_smp_algebra",
+      "sequence": 2,
+      "title": "Chapter 02 · Sistem Pertidaksamaan & Pemodelan",
+      "subjectCode": "mathematics",
+      "educationLevel": "SMP",
+      "dominantActivityKind": "challenge",
+      "status": "planned",
+      "startedAt": null,
+      "nodes": [
+        {
+          "id": "node_alg_02_1",
+          "sequence": 1,
+          "kind": "lesson",
+          "title": "Gerbang Pertidaksamaan",
+          "description": "Mengenal simbol <, >, <=, >= pada garis bilangan.",
+          "prerequisiteNodeIds": [],
+          "activityIds": ["act_alg_intro"],
+          "rewardPreview": { "xp": 40 },
+          "levelMilestoneBadge": 8
+        },
+        {
+          "id": "node_alg_02_2",
+          "sequence": 2,
+          "kind": "practice",
+          "title": "Lab Pemodelan Kontekstual",
+          "description": "Mengubah soal cerita menjadi model aljabar.",
+          "prerequisiteNodeIds": ["node_alg_02_1"],
+          "activityIds": ["act_alg_two_step"],
+          "rewardPreview": { "xp": 55 },
+          "levelMilestoneBadge": 9
+        },
+        {
+          "id": "node_alg_02_3",
+          "sequence": 3,
+          "kind": "boss",
+          "title": "Evaluasi Akhir Aljabar",
+          "description": "Capstone kompetensi Aljabar SMP.",
+          "prerequisiteNodeIds": ["node_alg_02_2"],
+          "activityIds": ["act_alg_boss"],
+          "rewardPreview": { "xp": 150 },
+          "levelMilestoneBadge": 10
+        }
+      ]
+    },
+    {
+      "id": "ch_quad_01",
+      "journeyId": "jrn_math_sma_quadratic",
+      "pathId": "path_math_sma_quadratic",
+      "sequence": 1,
+      "title": "Chapter 01 · Fungsi Kuadrat & Parabola",
+      "subjectCode": "mathematics",
+      "educationLevel": "SMA",
+      "dominantActivityKind": "practice",
+      "status": "in_progress",
+      "startedAt": "2026-11-19T09:00:00Z",
+      "nodes": [
+        {
+          "id": "node_quad_01_1",
+          "sequence": 1,
+          "kind": "lesson",
+          "title": "Mengenal Fungsi Kuadrat",
+          "description": "Bentuk umum f(x) = ax^2 + bx + c dan koefisien a.",
+          "prerequisiteNodeIds": [],
+          "activityIds": ["act_alg_intro"],
+          "rewardPreview": { "xp": 40 },
+          "levelMilestoneBadge": 0
+        },
+        {
+          "id": "node_quad_01_2",
+          "sequence": 2,
+          "kind": "practice",
+          "title": "Grafik Fungsi Kuadrat",
+          "description": "Menentukan titik potong sumbu dan arah terbuka parabola.",
+          "prerequisiteNodeIds": ["node_quad_01_1"],
+          "activityIds": ["act_alg_graph"],
+          "rewardPreview": { "xp": 50 },
+          "levelMilestoneBadge": 1
+        },
+        {
+          "id": "node_quad_01_3",
+          "sequence": 3,
+          "kind": "boss",
+          "title": "Titik Puncak Parabola",
+          "description": "Tentukan sumbu simetri dan nilai ekstrem fungsi kuadrat.",
+          "prerequisiteNodeIds": ["node_quad_01_2"],
+          "activityIds": ["act_alg_boss"],
+          "rewardPreview": { "xp": 100 },
+          "levelMilestoneBadge": 2
+        }
+      ]
+    },
+    {
+      "id": "ch_phys_01",
+      "journeyId": "jrn_phys_sma_mechanics",
+      "pathId": "path_phys_sma_mechanics",
+      "sequence": 1,
+      "title": "Chapter 01 · Kinematika & Hukum Newton",
+      "subjectCode": "physics",
+      "educationLevel": "SMA",
+      "dominantActivityKind": "simulation",
+      "status": "in_progress",
+      "startedAt": "2026-11-20T07:30:00Z",
+      "nodes": [
+        {
+          "id": "node_phys_01_1",
+          "sequence": 1,
+          "kind": "lesson",
+          "title": "Besaran & Satuan SI",
+          "description": "Pasangkan besaran fisika gaya, energi, dan daya dengan satuan SI.",
+          "prerequisiteNodeIds": [],
+          "activityIds": ["act_phys_units"],
+          "rewardPreview": { "xp": 40 },
+          "levelMilestoneBadge": 0
+        },
+        {
+          "id": "node_phys_01_2",
+          "sequence": 2,
+          "kind": "practice",
+          "title": "Gerak Lurus Beraturan",
+          "description": "Hitung kelajuan rata-rata dan analisis percepatan GLB.",
+          "prerequisiteNodeIds": ["node_phys_01_1"],
+          "activityIds": ["act_phys_glb"],
+          "rewardPreview": { "xp": 55 },
+          "levelMilestoneBadge": 1
+        },
+        {
+          "id": "node_phys_01_3",
+          "sequence": 3,
+          "kind": "simulation",
+          "title": "Eksperimen Hukum II Newton",
+          "description": "Ubah massa dan gaya untuk mengamati percepatan benda.",
+          "prerequisiteNodeIds": ["node_phys_01_2"],
+          "activityIds": ["act_phys_newton_sim"],
+          "rewardPreview": { "xp": 90, "achievementId": "ach_physics_voyager" },
+          "levelMilestoneBadge": 2
+        }
+      ]
+    }
+  ],
+  "userProgressSeeds": {
+    "usr_student_smp_free": {
+      "preferences": {
+        "selectionMode": "adaptive",
+        "preferredTemplateId": "adventure",
+        "pendingTemplateId": null
+      },
+      "unlocks": [
+        { "templateId": "adventure", "source": "base", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null },
+        { "templateId": "board", "source": "base", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null },
+        { "templateId": "skill", "source": "base", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null }
+      ],
+      "chapterSnapshots": {
+        "ch_alg_01": {
+          "templateId": "adventure",
+          "templateVersion": "1.0.0",
+          "selectionMode": "adaptive",
+          "selectionReason": { "policy": "ADAPTIVE_SCORE", "level": "SMP", "subject": "mathematics" },
+          "layoutConfig": { "theme": "forest" }
+        },
+        "ch_phys_01": {
+          "templateId": "board",
+          "templateVersion": "1.0.0",
+          "selectionMode": "adaptive",
+          "selectionReason": { "policy": "ADAPTIVE_SCORE", "level": "SMA", "subject": "physics" },
+          "layoutConfig": { "theme": "board" }
+        }
+      },
+      "completedNodeIds": ["node_alg_01_1", "node_alg_01_2"],
+      "inProgressNodeIds": ["node_alg_01_3"]
+    },
+    "usr_student_sma_prem": {
+      "preferences": {
+        "selectionMode": "personal",
+        "preferredTemplateId": "galaxy",
+        "pendingTemplateId": null
+      },
+      "unlocks": [
+        { "templateId": "adventure", "source": "base", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null },
+        { "templateId": "board", "source": "base", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null },
+        { "templateId": "skill", "source": "base", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null },
+        { "templateId": "explore", "source": "premium", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null },
+        { "templateId": "racing", "source": "premium", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null },
+        { "templateId": "galaxy", "source": "premium", "startsAt": "2026-01-01T00:00:00Z", "expiresAt": null }
+      ],
+      "chapterSnapshots": {
+        "ch_quad_01": {
+          "templateId": "skill",
+          "templateVersion": "1.0.0",
+          "selectionMode": "personal",
+          "selectionReason": { "policy": "PERSONAL_PREFERENCE_APPLIED", "requestedTemplateId": "skill" },
+          "layoutConfig": { "theme": "constellation" }
+        },
+        "ch_phys_01": {
+          "templateId": "galaxy",
+          "templateVersion": "1.0.0",
+          "selectionMode": "personal",
+          "selectionReason": { "policy": "PERSONAL_PREFERENCE_APPLIED", "requestedTemplateId": "galaxy" },
+          "layoutConfig": { "theme": "orbit" }
+        }
+      },
+      "completedNodeIds": ["node_quad_01_1"],
+      "inProgressNodeIds": ["node_quad_01_2"]
+    }
+  }
+}

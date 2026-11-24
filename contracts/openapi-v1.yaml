@@ -1,0 +1,1294 @@
+openapi: 3.0.3
+info:
+  title: EduMotion Canonical REST API
+  version: 1.0.0
+  description: >
+    Kontrak API publik backend-agnostic untuk EduMotion Web dan Mobile (Android/iOS).
+    Semua respon error mengikuti amplop standar ErrorEnvelope.
+    Tidak ada konvensi khusus framework backend/ORM yang mengikat frontend.
+servers:
+  - url: /api/v1
+    description: Versioned API prefix v1
+tags:
+  - name: Auth
+  - name: Journey
+  - name: Learning
+  - name: Questions
+  - name: AI Generator
+  - name: Assessment
+  - name: Mastery & Gamification
+  - name: School & Parent
+  - name: Platform Admin
+  - name: Ops
+
+x-canonical-events:
+  - QUESTION_VERSION_PUBLISHED
+  - AI_GENERATION_RUN_COMPLETED
+  - ACTIVITY_ATTEMPT_RECORDED
+  - ACTIVITY_COMPLETED
+  - COMPETENCY_MASTERY_UPDATED
+  - JOURNEY_NODE_COMPLETED
+  - JOURNEY_CHAPTER_COMPLETED
+  - JOURNEY_TEMPLATE_UNLOCKED
+  - JOURNEY_CHAPTER_STARTED
+  - XP_AWARDED
+  - ACHIEVEMENT_EARNED
+  - ASSESSMENT_SUBMITTED
+  - ASSESSMENT_GRADED
+  - SUBSCRIPTION_ENTITLEMENT_CHANGED
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    CorrelationIdHeader:
+      name: X-Correlation-ID
+      in: header
+      required: false
+      schema:
+        type: string
+    IdempotencyKeyHeader:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema:
+        type: string
+
+  schemas:
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, correlationId]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: object
+              additionalProperties: true
+            fieldErrors:
+              type: object
+              additionalProperties:
+                type: string
+            correlationId:
+              type: string
+
+    PaginationMeta:
+      type: object
+      required: [page, pageSize, totalItems, totalPages]
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalItems:
+          type: integer
+        totalPages:
+          type: integer
+
+    AuthTokens:
+      type: object
+      required: [accessToken, refreshToken, expiresAt]
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+
+    UserProfile:
+      type: object
+      required: [id, email, displayName, role, entitlement]
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        displayName:
+          type: string
+        initials:
+          type: string
+        role:
+          type: string
+        tenantId:
+          type: string
+          nullable: true
+        educationLevel:
+          type: string
+        curriculumId:
+          type: string
+        gradeLevelId:
+          type: string
+        entitlement:
+          type: string
+        isMinor:
+          type: boolean
+        privacyOptInPublicName:
+          type: boolean
+        linkedStudentIds:
+          type: array
+          items:
+            type: string
+        assignedClassIds:
+          type: array
+          items:
+            type: string
+
+    JourneyTemplate:
+      type: object
+      required: [id, version, name, enabled]
+      properties:
+        id:
+          type: string
+          enum: [adventure, board, explore, skill, racing, galaxy]
+        version:
+          type: integer
+        name:
+          type: string
+        enabled:
+          type: boolean
+        priorityWeight:
+          type: integer
+        unlocked:
+          type: boolean
+        eligible:
+          type: boolean
+        reasonCode:
+          type: string
+        reasonMessage:
+          type: string
+
+    JourneyPreferences:
+      type: object
+      required: [selectionMode]
+      properties:
+        selectionMode:
+          type: string
+          enum: [adaptive, personal, random, admin]
+        preferredTemplateId:
+          type: string
+          nullable: true
+        pendingTemplateId:
+          type: string
+          nullable: true
+        unlocks:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    JourneyViewModel:
+      type: object
+      required: [schemaVersion, journeyId, pathId, chapter, template, accessibility, nodes]
+      properties:
+        schemaVersion:
+          type: string
+        journeyId:
+          type: string
+        pathId:
+          type: string
+        chapter:
+          type: object
+          additionalProperties: true
+        template:
+          type: object
+          additionalProperties: true
+        accessibility:
+          type: object
+          additionalProperties: true
+        nodes:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    QuestionAuthoring:
+      type: object
+      required: [schemaVersion, id, version, type, metadata, content, interaction, answerSpec, scoring]
+      properties:
+        schemaVersion:
+          type: string
+          enum: [edumotion-question-v1]
+        id:
+          type: string
+        version:
+          type: integer
+        type:
+          type: string
+          enum:
+            - single_choice
+            - multiple_select
+            - true_false
+            - numeric
+            - short_text
+            - fill_blank
+            - matching
+            - ordering
+            - drag_drop
+            - graph_plot
+            - formula_input
+            - diagram_label
+            - simulation
+            - worked_solution
+        metadata:
+          type: object
+          additionalProperties: true
+        content:
+          type: object
+          additionalProperties: true
+        interaction:
+          type: object
+          additionalProperties: true
+        answerSpec:
+          type: object
+          additionalProperties: true
+        scoring:
+          type: object
+          additionalProperties: true
+        explanation:
+          type: object
+          additionalProperties: true
+        delivery:
+          type: object
+          additionalProperties: true
+        accessibility:
+          type: object
+          additionalProperties: true
+        governance:
+          type: object
+          additionalProperties: true
+
+    QuestionStudentDelivery:
+      type: object
+      description: Allowlisted projection without answerSpec, scoring, provenance, or governance.
+      required: [schemaVersion, questionId, version, type, content, interaction, delivery]
+      properties:
+        schemaVersion:
+          type: string
+        questionId:
+          type: string
+        version:
+          type: integer
+        type:
+          type: string
+        content:
+          type: object
+          additionalProperties: true
+        interaction:
+          type: object
+          additionalProperties: true
+        delivery:
+          type: object
+          additionalProperties: true
+        accessibility:
+          type: object
+          additionalProperties: true
+
+    AIGenerationRun:
+      type: object
+      required: [id, status, items]
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        estimatedCostUsd:
+          type: number
+        actualCostUsd:
+          type: number
+        budgetCapUsd:
+          type: number
+        maxRetries:
+          type: integer
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        auditTrail:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    AssessmentSession:
+      type: object
+      required: [id, assessmentId, status, expiresAt, heartsEnabled, xpAffectsGrade, snapshots]
+      properties:
+        id:
+          type: string
+        assessmentId:
+          type: string
+        title:
+          type: string
+        mode:
+          type: string
+        status:
+          type: string
+        startedAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        heartsEnabled:
+          type: boolean
+        xpAffectsGrade:
+          type: boolean
+        remainingSeconds:
+          type: integer
+        serverNowMs:
+          type: integer
+        snapshots:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        responses:
+          type: object
+          additionalProperties: true
+
+    MediaAsset:
+      type: object
+      required: [id, fileName, mimeType, sizeBytes, storageKey, url]
+      properties:
+        id:
+          type: string
+        fileName:
+          type: string
+        mimeType:
+          type: string
+        sizeBytes:
+          type: integer
+        storageKey:
+          type: string
+        url:
+          type: string
+        altText:
+          type: string
+        uploadedAt:
+          type: string
+          format: date-time
+
+paths:
+  /auth/demo-personas:
+    get:
+      tags: [Auth]
+      summary: Daftar persona demo terdaftar (aktif hanya saat mode demo/non-produksi diizinkan)
+      responses:
+        '200':
+          description: Daftar persona
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserProfile'
+
+  /auth/session:
+    get:
+      tags: [Auth]
+      summary: Memeriksa status sesi autentikasi saat ini via Bearer token
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Status sesi
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Autentikasi kredensial email dan kata sandi
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        '200':
+          description: Autentikasi berhasil
+        '401':
+          description: Kredensial tidak valid
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+        '422':
+          description: Validasi field gagal
+
+  /auth/demo-login:
+    post:
+      tags: [Auth]
+      summary: Masuk sebagai persona demo tertentu bila diizinkan environment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId]
+              properties:
+                userId: { type: string }
+      responses:
+        '200': { description: Login demo berhasil }
+        '403': { description: Demo login dinonaktifkan pada environment produksi }
+
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Rotasi refresh token dan penerbitan access token baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken: { type: string }
+      responses:
+        '200': { description: Token diperbarui }
+        '401': { description: Refresh token tidak valid atau sudah dicabut }
+
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Registrasi akun baru dan onboarding jenjang/kurikulum awal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [displayName, email, password]
+              properties:
+                displayName: { type: string }
+                email: { type: string }
+                password: { type: string }
+                educationLevel: { type: string }
+                curriculumId: { type: string }
+      responses:
+        '201': { description: Akun dibuat }
+        '422': { description: Validasi gagal }
+
+  /auth/forgot-password:
+    post:
+      tags: [Auth]
+      summary: Meminta tautan reset kata sandi
+      responses:
+        '200': { description: Permintaan reset diproses }
+
+  /auth/reset-password:
+    post:
+      tags: [Auth]
+      summary: Mengatur ulang kata sandi menggunakan token reset
+      responses:
+        '200': { description: Kata sandi diperbarui }
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Mengakhiri sesi dan mencabut refresh token aktif
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Logout berhasil }
+
+  /me/entitlements/upgrade:
+    post:
+      tags: [Auth]
+      summary: Mengubah paket entitlement pengguna (audit & non-pay-to-win)
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Entitlement diperbarui }
+
+  /me/profile:
+    patch:
+      tags: [Auth]
+      summary: Memperbarui profil dan preferensi privasi pengguna
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Profil diperbarui }
+
+  /journey-templates:
+    get:
+      tags: [Journey]
+      summary: Daftar katalog Journey template beserta status unlock per user
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Daftar template
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/JourneyTemplate' }
+
+  /me/journey/preferences:
+    get:
+      tags: [Journey]
+      summary: Mengambil preferensi template & daftar unlock milik user
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Preferensi Journey
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JourneyPreferences' }
+    put:
+      tags: [Journey]
+      summary: Memperbarui mode pemilihan template untuk chapter berikutnya
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Preferensi diperbarui }
+
+  /me/journey/preferences/pending-template:
+    put:
+      tags: [Journey]
+      summary: Menyimpan pendingTemplateId tanpa mengubah snapshot chapter aktif
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Pending preference tersimpan }
+        '403': { description: Template terkunci atau tidak memenuhi syarat }
+
+  /me/journey/template-unlocks:
+    get:
+      tags: [Journey]
+      summary: Daftar unlock template yang dimiliki siswa
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar unlock }
+
+  /journeys/{journeyId}/chapters/{chapterId}:
+    get:
+      tags: [Journey]
+      summary: Detail chapter beserta canonical view model
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: journeyId, in: path, required: true, schema: { type: string } }
+        - { name: chapterId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Detail chapter }
+
+  /journeys/{journeyId}/chapters/{chapterId}/map:
+    get:
+      tags: [Journey]
+      summary: Mengambil atau membuat snapshot canonical view model peta chapter
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: journeyId, in: path, required: true, schema: { type: string } }
+        - { name: chapterId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Canonical view model chapter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  empty: { type: boolean }
+                  viewModel: { $ref: '#/components/schemas/JourneyViewModel' }
+
+  /journeys/{journeyId}/nodes/{nodeId}/start:
+    post:
+      tags: [Journey]
+      summary: Memulai node setelah validasi prasyarat server-side
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: journeyId, in: path, required: true, schema: { type: string } }
+        - { name: nodeId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Node dimulai }
+        '409': { description: Prasyarat node belum terpenuhi }
+
+  /journeys/{journeyId}/nodes/{nodeId}/complete:
+    post:
+      tags: [Journey]
+      summary: Menyelesaikan node secara idempotent dan mencatat XP ledger + event outbox
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: journeyId, in: path, required: true, schema: { type: string } }
+        - { name: nodeId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/IdempotencyKeyHeader' }
+      responses:
+        '200': { description: Node selesai }
+
+  /journeys/{journeyId}/chapters/next:
+    post:
+      tags: [Journey]
+      summary: Membuka chapter berikutnya & membuat snapshot template immutable dalam 1 transaksi
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: journeyId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/IdempotencyKeyHeader' }
+      responses:
+        '200': { description: Chapter baru dan snapshot terbuat }
+
+  /journeys/chapters/{chapterId}/snapshot:
+    put:
+      tags: [Journey]
+      summary: Endpoint penolakan eksplisit terhadap mutasi snapshot chapter aktif
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: chapterId, in: path, required: true, schema: { type: string } }
+      responses:
+        '409': { description: CHAPTER_TEMPLATE_IMMUTABLE }
+
+  /question-taxonomies:
+    get:
+      tags: [Learning]
+      summary: Katalog kurikulum, jenjang, mata pelajaran, topik, dan kompetensi kanonis
+      responses:
+        '200': { description: Taksonomi lengkap }
+
+  /learning-paths:
+    get:
+      tags: [Learning]
+      summary: Daftar learning paths & chapter terfilter
+      responses:
+        '200': { description: Daftar learning paths }
+
+  /learning-paths/{pathId}:
+    get:
+      tags: [Learning]
+      summary: Detail satu learning path
+      parameters:
+        - { name: pathId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Detail learning path }
+
+  /learning-paths/{pathId}/chapters:
+    get:
+      tags: [Learning]
+      summary: Daftar chapter dalam sebuah learning path
+      parameters:
+        - { name: pathId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Daftar chapter }
+
+  /activities:
+    get:
+      tags: [Learning]
+      summary: Daftar aktivitas latihan yang tersedia
+      responses:
+        '200': { description: Daftar aktivitas }
+
+  /activities/{activityId}/delivery:
+    get:
+      tags: [Learning]
+      summary: Payload aktivitas dan daftar QuestionStudentDelivery ter-sanitasi
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: activityId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Delivery aktivitas }
+
+  /activities/{activityId}/attempts:
+    post:
+      tags: [Learning]
+      summary: Mengumpulkan jawaban latihan, evaluasi server, update mastery & XP ledger
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: activityId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/IdempotencyKeyHeader' }
+      responses:
+        '200': { description: Hasil evaluasi percobaan }
+
+  /activities/{activityId}/attempts/{attemptId}:
+    get:
+      tags: [Learning]
+      summary: Mengambil detail percobaan aktivitas
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: activityId, in: path, required: true, schema: { type: string } }
+        - { name: attemptId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Detail percobaan }
+
+  /questions/{questionId}/hints:
+    get:
+      tags: [Learning]
+      summary: Mengambil hint bertahap untuk soal latihan
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Teks hint }
+
+  /activities/gallery:
+    get:
+      tags: [Learning]
+      summary: Mengambil contoh 14 tipe soal interaktif untuk Galeri
+      responses:
+        '200': { description: Koleksi 14 tipe soal }
+
+  /activities/gallery/{questionId}/grade:
+    post:
+      tags: [Learning]
+      summary: Menilai interaksi soal preview di galeri
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Hasil preview }
+
+  /questions:
+    get:
+      tags: [Questions]
+      summary: Daftar soal di Bank Soal dengan isolasi tenant, filter, sort, & paginasi
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar soal terpaginasi }
+    post:
+      tags: [Questions]
+      summary: Membuat draf soal baru dengan skema authoring kanonis
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Draf soal tersimpan }
+
+  /questions/validate:
+    post:
+      tags: [Questions]
+      summary: Memvalidasi payload authoring soal secara deterministik
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Hasil validasi }
+
+  /questions/preview:
+    post:
+      tags: [Questions]
+      summary: Memproyeksikan payload authoring menjadi Student Delivery DTO tersanitasi
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: DTO preview
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/QuestionStudentDelivery' }
+
+  /questions/{questionId}:
+    get:
+      tags: [Questions]
+      summary: Mengambil detail authoring soal beserta riwayat versi
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Detail soal }
+    patch:
+      tags: [Questions]
+      summary: Memperbarui soal berstatus draft/validation_failed (published ditolak 409)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Draf diperbarui }
+        '409': { description: PUBLISHED_QUESTION_IMMUTABLE }
+
+  /questions/{questionId}/validate:
+    post:
+      tags: [Questions]
+      summary: Validasi soal tersimpan
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Laporan validasi }
+
+  /questions/{questionId}/preview:
+    post:
+      tags: [Questions]
+      summary: Preview DTO siswa untuk soal tersimpan
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: DTO siswa tersanitasi }
+
+  /questions/{questionId}/submit-review:
+    post:
+      tags: [Questions]
+      summary: Mengajukan draf valid ke antrean review SME
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Status berubah menjadi in_review }
+
+  /questions/{questionId}/reviews:
+    post:
+      tags: [Questions]
+      summary: Keputusan SME (approve atau request_changes) + catatan review
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Review tercatat }
+
+  /questions/{questionId}/approve:
+    post:
+      tags: [Questions]
+      summary: Persetujuan eksplisit soal in_review menuju approved
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Soal disetujui }
+
+  /questions/{questionId}/publish:
+    post:
+      tags: [Questions]
+      summary: Menerbitkan versi soal approved menjadi published secara idempotent
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/IdempotencyKeyHeader' }
+      responses:
+        '200': { description: Soal diterbitkan }
+
+  /questions/{questionId}/new-version:
+    post:
+      tags: [Questions]
+      summary: Mengkloning versi published menjadi versi baru berstatus draft
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '201': { description: Versi draft baru terbuat }
+
+  /questions/{questionId}/archive:
+    post:
+      tags: [Questions]
+      summary: Mengarsipkan versi soal
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Soal diarsipkan }
+
+  /question-media/presign:
+    post:
+      tags: [Questions]
+      summary: Validasi keamanan & penerbitan metadata upload media soal (MIME, ukuran, dimensi, magic bytes)
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201':
+          description: Aset media diterima
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MediaAsset' }
+        '413': { description: File terlalu besar }
+        '415': { description: Tipe/magic bytes tidak didukung atau berbahaya }
+
+  /ai/question-generation-stages:
+    get:
+      tags: [AI Generator]
+      summary: Daftar 9 tahap pipeline AI Generator
+      responses:
+        '200': { description: Tahap pipeline }
+
+  /ai/question-generation-runs:
+    get:
+      tags: [AI Generator]
+      summary: Daftar riwayat AI generation runs milik tenant
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar runs }
+    post:
+      tags: [AI Generator]
+      summary: Menjalankan AI Question Generator dengan validasi taksonomi, cost cap, & verifier deterministik
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201':
+          description: Run selesai diproses
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AIGenerationRun' }
+
+  /ai/question-generation-runs/{runId}:
+    get:
+      tags: [AI Generator]
+      summary: Detail satu AI generation run
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: runId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Detail run }
+
+  /ai/question-generation-runs/{runId}/cancel:
+    post:
+      tags: [AI Generator]
+      summary: Membatalkan AI generation run
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: runId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Run dibatalkan }
+
+  /ai/question-generation-runs/{runId}/items:
+    get:
+      tags: [AI Generator]
+      summary: Daftar item kandidat dalam satu run AI
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: runId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Daftar item }
+
+  /ai/question-generation-items/{itemId}:
+    get:
+      tags: [AI Generator]
+      summary: Detail satu item kandidat AI
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: itemId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Detail item }
+
+  /ai/question-generation-items/{itemId}/accept:
+    post:
+      tags: [AI Generator]
+      summary: Mempromosikan item AI lolos verifier menjadi DRAFT di Bank Soal (tidak pernah auto-publish)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: itemId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Draft terbuat }
+
+  /ai/question-generation-items/{itemId}/reject:
+    post:
+      tags: [AI Generator]
+      summary: Menolak item kandidat AI beserta alasan audit
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: itemId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Item ditolak }
+
+  /ai/question-generation-items/{itemId}/retry:
+    post:
+      tags: [AI Generator]
+      summary: Mengulang generasi item dalam batas maxRetries
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: itemId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Retry diproses }
+        '409': { description: MAX_RETRIES_EXCEEDED }
+
+  /assessments:
+    get:
+      tags: [Assessment]
+      summary: Daftar asesmen (Tryout, UTS, Placement) dalam scope user/tenant
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar asesmen }
+
+  /assessments/{assessmentId}/sessions:
+    post:
+      tags: [Assessment]
+      summary: Memulai atau melanjutkan sesi ujian formal dengan immutable snapshot & timer server
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: assessmentId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/IdempotencyKeyHeader' }
+      responses:
+        '200': { description: Sesi ujian siap }
+
+  /assessment-sessions/{sessionId}:
+    get:
+      tags: [Assessment]
+      summary: Mengambil state sesi ujian dan sisa waktu otoritatif server
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: sessionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: State sesi ujian
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AssessmentSession' }
+
+  /assessment-sessions/{sessionId}/responses/{questionSnapshotId}:
+    put:
+      tags: [Assessment]
+      summary: Autosave jawaban soal ujian secara idempotent sebelum waktu server habis
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: sessionId, in: path, required: true, schema: { type: string } }
+        - { name: questionSnapshotId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/IdempotencyKeyHeader' }
+      responses:
+        '200': { description: Jawaban tersimpan }
+        '409': { description: Sesi habis waktu atau sudah terkunci }
+
+  /assessment-sessions/{sessionId}/submit:
+    post:
+      tags: [Assessment]
+      summary: Mengumpulkan ujian secara idempotent dan menilai sesuai releaseAt
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: sessionId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/IdempotencyKeyHeader' }
+      responses:
+        '200': { description: Hasil ujian }
+
+  /assessment-sessions/{sessionId}/result:
+    get:
+      tags: [Assessment]
+      summary: Mengambil hasil penilaian ujian (pembahasan ditahan jika releaseAt > serverNow)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: sessionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Hasil penilaian }
+
+  /me/mastery:
+    get:
+      tags: [Mastery & Gamification]
+      summary: Ringkasan penguasaan kompetensi (terpisah dari XP), rekomendasi remedial, & jadwal review
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Ringkasan mastery }
+
+  /me/spaced-repetition/{srId}/complete:
+    post:
+      tags: [Mastery & Gamification]
+      summary: Menyelesaikan sesi spaced repetition & menjadwalkan interval 1/3/7/14/30d berikutnya
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: srId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Jadwal review diperbarui }
+
+  /me/activity-history:
+    get:
+      tags: [Mastery & Gamification]
+      summary: Riwayat aktivitas belajar siswa
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar riwayat }
+
+  /me/gamification:
+    get:
+      tags: [Mastery & Gamification]
+      summary: Saldo XP dari ledger append-only, rank, streak, hearts, gems, & catatan ledger
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Statistik gamifikasi }
+
+  /leaderboard:
+    get:
+      tags: [Mastery & Gamification]
+      summary: Papan peringkat liga dengan child-safe privacy masking untuk pengguna di bawah umur
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar peringkat }
+
+  /me/quests-achievements:
+    get:
+      tags: [Mastery & Gamification]
+      summary: Daftar misi harian/mingguan dan pencapaian siswa
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Quests dan achievements }
+
+  /me/quests/{questId}/claim:
+    post:
+      tags: [Mastery & Gamification]
+      summary: Klaim hadiah XP misi secara idempotent
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: questId, in: path, required: true, schema: { type: string } }
+        - { $ref: '#/components/parameters/IdempotencyKeyHeader' }
+      responses:
+        '200': { description: Hadiah diklaim }
+
+  /me/notifications:
+    get:
+      tags: [Mastery & Gamification]
+      summary: Kotak masuk notifikasi pengguna
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar notifikasi }
+
+  /me/notifications/{notificationId}/read:
+    post:
+      tags: [Mastery & Gamification]
+      summary: Menandai notifikasi sebagai telah dibaca
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: notificationId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Notifikasi diperbarui }
+
+  /school/dashboard:
+    get:
+      tags: [School & Parent]
+      summary: Ringkasan portal sekolah terisolasi tenant & rombel yang ditugaskan
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Ringkasan sekolah }
+
+  /school/students:
+    get:
+      tags: [School & Parent]
+      summary: Daftar siswa dalam cakupan sekolah/rombel
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar siswa }
+    post:
+      tags: [School & Parent]
+      summary: Mendaftarkan siswa baru dalam institusi
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Siswa terdaftar }
+
+  /school/worked-submissions:
+    get:
+      tags: [School & Parent]
+      summary: Daftar jawaban uraian worked_solution untuk dinilai guru
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar kiriman uraian }
+
+  /school/worked-submissions/{submissionId}/grade:
+    post:
+      tags: [School & Parent]
+      summary: Menyimpan penilaian rubrik manual dan mencatat audit trail
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: submissionId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Penilaian tersimpan }
+
+  /school/counseling-signals:
+    get:
+      tags: [School & Parent]
+      summary: Sinyal risiko akademik BK dalam scope (akses dicatat di audit log)
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar sinyal risiko }
+
+  /school/counseling-signals/{signalId}/notes:
+    post:
+      tags: [School & Parent]
+      summary: Mencatat tindak lanjut konseling BK (audited)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: signalId, in: path, required: true, schema: { type: string } }
+      responses:
+        '201': { description: Catatan BK tersimpan }
+
+  /parent/children:
+    get:
+      tags: [School & Parent]
+      summary: Data progres belajar anak yang tertaut resmi pada akun Orang Tua
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentId, in: query, required: false, schema: { type: string } }
+      responses:
+        '200': { description: Ringkasan anak tertaut }
+        '403': { description: FORBIDDEN_STUDENT_LINK }
+
+  /school/roles:
+    get:
+      tags: [School & Parent]
+      summary: Daftar peran kustom tenant sekolah
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar peran kustom }
+    post:
+      tags: [School & Parent]
+      summary: Membuat peran kustom berizin untuk tenant sekolah
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Peran kustom terbuat }
+
+  /admin/overview:
+    get:
+      tags: [Platform Admin]
+      summary: Ringkasan operasional platform (terbatas sesuai permission peran)
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Statistik platform }
+
+  /admin/institutions/{tenantId}/status:
+    patch:
+      tags: [Platform Admin]
+      summary: Mengubah status institusi lintas-tenant (wajib auditReason)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: tenantId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Status institusi diperbarui }
+        '403': { description: Ditolak bagi admin non-superuser }
+        '422': { description: AUDIT_REASON_REQUIRED }
+
+  /admin/journey-templates:
+    get:
+      tags: [Platform Admin]
+      summary: Mengelola katalog dan bobot Journey Template global
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar katalog template }
+
+  /admin/journey-templates/{templateId}:
+    patch:
+      tags: [Platform Admin]
+      summary: Memperbarui status/bobot template untuk chapter baru (snapshot aktif tetap utuh)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: templateId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Template diperbarui }
+
+  /plans:
+    get:
+      tags: [Platform Admin]
+      summary: Daftar paket langganan & entitlement B2C/B2B
+      responses:
+        '200': { description: Daftar paket }
+
+  /admin/audit-logs:
+    get:
+      tags: [Platform Admin]
+      summary: Audit log immutable untuk aksi sensitif dan lintas-tenant
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Daftar audit log }
+
+  /health:
+    get:
+      tags: [Ops]
+      summary: Liveness probe proses API
+      responses:
+        '200': { description: Layanan hidup }
+
+  /ready:
+    get:
+      tags: [Ops]
+      summary: Readiness probe koneksi PostgreSQL dan kesiapan skema
+      responses:
+        '200': { description: Siap melayani traffic }
+        '503': { description: Database belum siap }
+
+  /metrics:
+    get:
+      tags: [Ops]
+      summary: Metrik operasional dasar (request count, error count, outbox queue)
+      responses:
+        '200': { description: Metrik JSON }
