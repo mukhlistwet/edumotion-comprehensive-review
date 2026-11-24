@@ -209,6 +209,55 @@
       "entitlement": "institution_pro",
       "title": "Platform Super Admin",
       "description": "Akses operasional penuh platform; tindakan lintas-tenant wajib menyertakan alasan audit."
+    },
+    {
+      "id": "usr_homeroom_a",
+      "email": "budi.walikelas@cendekia.demo",
+      "displayName": "Budi Hartono, S.Pd.",
+      "initials": "BH",
+      "role": "homeroom_teacher",
+      "tenantId": "tenant_cendekia",
+      "assignedClassIds": ["cls_10_ipa_1"],
+      "assignedSubjectIds": ["subj_math"],
+      "entitlement": "institution_pro",
+      "title": "Wali Kelas X IPA 1 · SMA Cendekia",
+      "description": "Wali kelas X IPA 1 yang memantau progres akademik, kehadiran belajar, dan konseling kelas perwaliannya."
+    },
+    {
+      "id": "usr_academic_admin_a",
+      "email": "tono.akademik@cendekia.demo",
+      "displayName": "Tono Suryono, S.Kom.",
+      "initials": "TS",
+      "role": "school_academic_admin",
+      "tenantId": "tenant_cendekia",
+      "assignedClassIds": ["cls_10_ipa_1", "cls_11_ipa_2", "cls_12_ipa_1"],
+      "entitlement": "institution_pro",
+      "title": "Admin Akademik Sekolah · SMA Cendekia",
+      "description": "Mengelola data siswa, staf guru, rombongan belajar, mata pelajaran, peranan sekolah, dan kalender akademik."
+    },
+    {
+      "id": "usr_principal_a",
+      "email": "wahyu.kepsek@cendekia.demo",
+      "displayName": "Drs. Wahyu Hidayat, M.Pd.",
+      "initials": "WH",
+      "role": "principal",
+      "tenantId": "tenant_cendekia",
+      "assignedClassIds": ["cls_10_ipa_1", "cls_11_ipa_2", "cls_12_ipa_1"],
+      "entitlement": "institution_pro",
+      "title": "Kepala Sekolah · SMA Cendekia",
+      "description": "Kepala sekolah dengan akses supervisi penuh atas dashboard akademik, laporan, konseling, dan pengaturan sekolah."
+    },
+    {
+      "id": "usr_school_owner_a",
+      "email": "irfan.yayasan@cendekia.demo",
+      "displayName": "Ir. Irfan Hakim, M.M.",
+      "initials": "IH",
+      "role": "school_owner",
+      "tenantId": "tenant_cendekia",
+      "assignedClassIds": ["cls_10_ipa_1", "cls_11_ipa_2", "cls_12_ipa_1"],
+      "entitlement": "institution_pro",
+      "title": "Ketua Yayasan / School Owner · SMA Cendekia",
+      "description": "Pemilik institusi/yayasan dengan wewenang penuh tata kelola staf, peran, laporan eksekutif, dan pengaturan sekolah."
     }
   ]
 }

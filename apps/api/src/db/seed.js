@@ -400,14 +400,34 @@ export async function seedDatabase(db, { demoPassword = process.env.DEMO_SEED_PA
       );
     }
   });
+
+  return {
+    tenantCount: personasTenants.tenants.length,
+    userCount: personasTenants.personas.length,
+    questionCount: questionsBank.questions.length,
+    chapterCount: (learningJourneys.chapters || []).length,
+    defaultPassword: demoPassword,
+    actors: personasTenants.personas.map((p) => ({
+      id: p.id,
+      role: p.role,
+      displayName: p.displayName,
+      email: p.email,
+      password: demoPassword,
+      tenantId: p.tenantId || 'global'
+    }))
+  };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const db = await createDbPool();
   try {
     await runMigrations(db);
-    await seedDatabase(db);
-    console.log('Database migrated & seeded successfully.');
+    const summary = await seedDatabase(db);
+    console.log(
+      `Database migrated & seeded successfully (${summary.tenantCount} tenants, ${summary.userCount} users, ${summary.questionCount} questions, ${summary.chapterCount} chapters).`
+    );
+    console.log(`Default demo password for all seeded actors: ${summary.defaultPassword}`);
+    console.table(summary.actors);
   } finally {
     await db.close();
   }

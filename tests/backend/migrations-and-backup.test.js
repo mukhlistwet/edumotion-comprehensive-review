@@ -1,5 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
+import { ROLES } from '@edumotion/domain';
 import { createDbPool } from '../../apps/api/src/db/pool.js';
 import { runMigrations } from '../../apps/api/src/db/migrate.js';
 import { seedDatabase } from '../../apps/api/src/db/seed.js';
@@ -20,7 +21,13 @@ describe('PostgreSQL Migrations, Append-Only DB Guards, Seed Deterministik & Bac
       await seedDatabase(db); // idempotent seed re-run
 
       const userCount = await db.query('SELECT COUNT(*)::int AS cnt FROM users');
-      expect(userCount.rows[0].cnt).toBe(13);
+      expect(userCount.rows[0].cnt).toBe(17);
+
+      const distinctRolesRes = await db.query('SELECT DISTINCT role FROM users');
+      const seededRoles = distinctRolesRes.rows.map((r) => r.role);
+      for (const canonicalRole of Object.values(ROLES)) {
+        expect(seededRoles).toContain(canonicalRole);
+      }
 
       // Database-level append-only guard rejects direct UPDATE or DELETE on xp_ledger and audit_logs
       await expect(
